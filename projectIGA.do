@@ -48,7 +48,7 @@ clear all
 * Jhoanne
     if `"`c(username)'"' == "JYnion" {
         global 		code  	"C:\Users\jynion\git\Sample"
-		global 		data	"E:\Google Drive\jy_mrt_files\sample_project"
+		global 		data	"E:\Google Drive\INSTATOJT"
 		}
 		
 * Jacob		

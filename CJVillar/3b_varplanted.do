@@ -253,8 +253,16 @@
 
 	/*In case reshaping to wide is needed by reasons*/
 	*Reshape to wide	
-	*gen act = 1
-	*reshape wide rea, i(id) j(reasons)
+	gen act = 1
+	reshape wide rea, i(id) j(reason)
+	
+	/*
+	
+	JY comment:
+	 output of reshape to wide : variable reasons contains missing values
+	 There is a need to return the data in its original shape with 605 cases. 
+	
+	*/
 	
 *Price
 
@@ -350,6 +358,11 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 	
 * **********************************************************************
 * 4 -OUTPUTS
+*   To Jacob: May I know when is the taghh var necessary? I did not run the 
+*             reshape syntax in line 244 and notice running the taghh 
+*             would only result to code=1. 
+*              
+*
 * **********************************************************************
 *Flagging of values 
 
@@ -361,13 +374,17 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 		*To know unique number of households 
 		tab tagunique if tagunique == 1
 		
-		*To know reasons of selling per household
-		tab reasons if tagvar== 1
-		
+
 
 	*by hhid and variety
 	egen tagvar = tag(hhid variety)
 	
+		*To know unique number of households 
+		tab tagunique if tagvar == 1
+		
+		*To know reasons of selling per household
+		tab reason if tagvar== 1 
+		
 		*tabulation of variety by classif
 		tab variety classif if tagvar ==1 
 		
@@ -392,11 +409,17 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 		*Count how many households planted IR504 during Wet Season
 		count if season2 == 1 & variety == "IR504" & taghh ==1
 		
+	
+		
 		*Count how many households planted IR504 during Dry Season
 		count if season2 == 2 & variety == "IR504" & taghh ==1
 
 		*tabulation of variety by season2 per hhid 
 			tab variety season2 if taghh == 1
+			
+		/*recommendation: use tab to check with other categories for efficiency	*/
+			
+			tab taghh season2 if variety == "IR504" & taghh ==1
 			
 	
 	********************************************************
@@ -486,7 +509,7 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 	note: prod, Sold_kg, areaplanted  is the same with Conv_prod, Conv_sold and Conv_area respectively
 	 
 *Arrange all the variables in the data with specific order" 
-	order resid session hh hhid classif variety season2 year method source_seed seedtype buyers reasons price amt_seed per_sold distance_km areaunit conv_area conv_prod conv_sold yield
+	order resid session hh hhid classif variety season2 year method source_seed seedtype buyers reason price amt_seed per_sold distance_km areaunit conv_area conv_prod conv_sold yield
 	
 *labelling variables
 
@@ -533,7 +556,7 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 	compress
 	describe
 	summarize 
-		
+	
 *Sort the data
 	sort 				resid session hh hhid
 *Saving the dataset	
