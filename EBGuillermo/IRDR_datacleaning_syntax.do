@@ -239,6 +239,9 @@
 	replace SP_jd = 0 if ir_jd != "SHEATH PANICLE" | dr_jd != "SHEATH PANICLE"
 	replace Tungro_jd = 0 if ir_jd != "TUNGRO" | dr_jd != "TUNGRO"
 	
+	
+	
+	
 * **********************************************************************
 * 4 -	VARIABLE LABEL, LABEL DEFINITIONS, AND LABEL VALUES
 * **********************************************************************
@@ -393,6 +396,13 @@
 * **********************************************************************
 * 5 -	EXPECTED OUTPUT
 * **********************************************************************
+
+
+	/*
+	Comment: 
+	How do we verify if the stats are correct? Please add some commands(e.g., table, desc stat)
+	Kindly return the data back to its original shape (wide with obs=156).
+	*/
 
 *Frequency and Percentage Distribution of Insects and Diseases Found in Replacement Varieties during Wet Season
 	tab ir_jw repvar_jw if repvar_jw == "PHKA RUMDOUL" | repvar_jw == "IR504", col rowsort
