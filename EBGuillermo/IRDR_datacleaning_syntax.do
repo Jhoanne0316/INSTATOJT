@@ -97,6 +97,7 @@
 	replace ir_jd = "THRIPS" if ir_jd == "THRIP"
 	replace ir_jd = "THRIPS" if ir_jd == "THRIPS"
 	replace ir_jd = "BACTERIAL BLIGHT" if ir_jd == "BACTERIAL LEAF BLIGHT"
+	replace ir_jd= "BLAST" if ir_jd == "RICE BLAST"
 	
 	replace dr_jw= "BACTERIAL BLIGHT" if dr_jw== "BACTERIAL LEAF BLIGHT"
 	replace dr_jw= "NECK BLAST" if dr_jw== "LEAF BLIGHT"
@@ -143,7 +144,6 @@
 	gen LF_jw = 1 if ir_jw1 == "LEAF FOLDER" | ir_jw2 == "LEAF FOLDER" | ir_jw3 == "LEAF FOLDER" | ir_jw4 == "LEAF FOLDER" | ir_jw5 == "LEAF FOLDER" | ir_jw6 == "LEAF FOLDER" | dr_jw1 == "LEAF FOLDER" | dr_jw2 == "LEAF FOLDER" | dr_jw3 == "LEAF FOLDER" | dr_jw4 == "LEAF FOLDER"
 	gen PH_jw = 1 if ir_jw1 == "PLANTHOPPER" | ir_jw2 == "PLANTHOPPER" | ir_jw3 == "PLANTHOPPER" | ir_jw4 == "PLANTHOPPER" | ir_jw5 == "PLANTHOPPER" | ir_jw6 == "PLANTHOPPER" | dr_jw1 == "PLANTHOPPER" | dr_jw2 == "PLANTHOPPER" | dr_jw3 == "PLANTHOPPER" | dr_jw4 == "PLANTHOPPER"
 	gen Rat_jw = 1 if ir_jw1 == "RAT" | ir_jw2 == "RAT" | ir_jw3 == "RAT" | ir_jw4 == "RAT" | ir_jw5 == "RAT" | ir_jw6 == "RAT" | dr_jw1 == "RAT" | dr_jw2 == "RAT" | dr_jw3 == "RAT" | dr_jw4 == "RAT"
-	gen RB_jw = 1 if ir_jw1 == "RICE BLAST" | ir_jw2 == "RICE BLAST" | ir_jw3 == "RICE BLAST" | ir_jw4 == "RICE BLAST" | ir_jw5 == "RICE BLAST" | ir_jw6 == "RICE BLAST" | dr_jw1 == "RICE BLAST" | dr_jw2 == "RICE BLAST" | dr_jw3 == "RICE BLAST" | dr_jw4 == "RICE BLAST"
 	gen RBug_jw = 1 if ir_jw1 == "RICE BUG" | ir_jw2 == "RICE BUG" | ir_jw3 == "RICE BUG" | ir_jw4 == "RICE BUG" | ir_jw5 == "RICE BUG" | ir_jw6 == "RICE BUG" | dr_jw1 == "RICE BUG" | dr_jw2 == "RICE BUG" | dr_jw3 == "RICE BUG" | dr_jw4 == "RICE BUG"
 	gen Rodent_jw = 1 if ir_jw1 == "RODENT" | ir_jw2 == "RODENT" | ir_jw3 == "RODENT" | ir_jw4 == "RODENT" | ir_jw5 == "RODENT" | ir_jw6 == "RODENT" | dr_jw1 == "RODENT" | dr_jw2 == "RODENT" | dr_jw3 == "RODENT" | dr_jw4 == "RODENT"
 	gen SR_jw = 1 if ir_jw1 == "SHEATH ROT" | ir_jw2 == "SHEATH ROT" | ir_jw3 == "SHEATH ROT" | ir_jw4 == "SHEATH ROT" | ir_jw5 == "SHEATH ROT" | ir_jw6 == "SHEATH ROT" | dr_jw1 == "SHEATH ROT" | dr_jw2 == "SHEATH ROT" | dr_jw3 == "SHEATH ROT" | dr_jw4 == "SHEATH ROT"
@@ -171,7 +171,6 @@
 	replace LF_jw = 0 if LF_jw == .
 	replace PH_jw = 0 if PH_jw == .
 	replace Rat_jw = 0 if Rat_jw == .
-	replace RB_jw = 0 if RB_jw == .
 	replace RBug_jw = 0 if RBug_jw == .
 	replace Rodent_jw = 0 if Rodent_jw == .
 	replace SR_jw = 0 if SR_jw == .
@@ -200,8 +199,7 @@
 	gen LF_jd = 1 if ir_jd1 == "LEAF FOLDER" | ir_jd2 == "LEAF FOLDER" | ir_jd3 == "LEAF FOLDER" | ir_jd4 == "LEAF FOLDER" | ir_jd5 == "LEAF FOLDER" | ir_jd6 == "LEAF FOLDER" | dr_jd1 == "LEAF FOLDER" | dr_jd2 == "LEAF FOLDER" | dr_jd3 == "LEAF FOLDER" | dr_jd4 == "LEAF FOLDER"
 	gen PH_jd = 1 if ir_jd1 == "PLANTHOPPER" | ir_jd2 == "PLANTHOPPER" | ir_jd3 == "PLANTHOPPER" | ir_jd4 == "PLANTHOPPER" | ir_jd5 == "PLANTHOPPER" | ir_jd6 == "PLANTHOPPER" | dr_jd1 == "PLANTHOPPER" | dr_jd2 == "PLANTHOPPER" | dr_jd3 == "PLANTHOPPER" | dr_jd4 == "PLANTHOPPER"
 	gen Rat_jd = 1 if ir_jd1 == "RAT" | ir_jd2 == "RAT" | ir_jd3 == "RAT" | ir_jd4 == "RAT" | ir_jd5 == "RAT" | ir_jd6 == "RAT" | dr_jd1 == "RAT" | dr_jd2 == "RAT" | dr_jd3 == "RAT" | dr_jd4 == "RAT"
-	gen RB_jd = 1 if ir_jd1 == "RICE BLAST" | ir_jd2 == "RICE BLAST" | ir_jd3 == "RICE BLAST" | ir_jd4 == "RICE BLAST" | ir_jd5 == "RICE BLAST" | ir_jd6 == "RICE BLAST" | dr_jd1 == "RICE BLAST" | dr_jd2 == "RICE BLAST" | dr_jd3 == "RICE BLAST" | dr_jd4 == "RICE BLAST"
-	gen RBug_jd = 1 if ir_jd1 == "RICE BUG" | ir_jd2 == "RICE BUG" | ir_jd3 == "RICE BUG" | ir_jd4 == "RICE BUG" | ir_jd5 == "RICE BUG" | ir_jd6 == "RICE BUG" | dr_jd1 == "RICE BUG" | dr_jd2 == "RICE BUG" | dr_jd3 == "RICE BUG" | dr_jd4 == "RICE BUG"
+		gen RBug_jd = 1 if ir_jd1 == "RICE BUG" | ir_jd2 == "RICE BUG" | ir_jd3 == "RICE BUG" | ir_jd4 == "RICE BUG" | ir_jd5 == "RICE BUG" | ir_jd6 == "RICE BUG" | dr_jd1 == "RICE BUG" | dr_jd2 == "RICE BUG" | dr_jd3 == "RICE BUG" | dr_jd4 == "RICE BUG"
 	gen Rodent_jd = 1 if ir_jd1 == "RODENT" | ir_jd2 == "RODENT" | ir_jd3 == "RODENT" | ir_jd4 == "RODENT" | ir_jd5 == "RODENT" | ir_jd6 == "RODENT" | dr_jd1 == "RODENT" | dr_jd2 == "RODENT" | dr_jd3 == "RODENT" | dr_jd4 == "RODENT"
 	gen SR_jd = 1 if ir_jd1 == "SHEATH ROT" | ir_jd2 == "SHEATH ROT" | ir_jd3 == "SHEATH ROT" | ir_jd4 == "SHEATH ROT" | ir_jd5 == "SHEATH ROT" | ir_jd6 == "SHEATH ROT" | dr_jd1 == "SHEATH ROT" | dr_jd2 == "SHEATH ROT" | dr_jd3 == "SHEATH ROT" | dr_jd4 == "SHEATH ROT"
 	gen SHGH_jd = 1 if ir_jd1 == "SHORT-HORNED GRASSHOPPER" | ir_jd2 == "SHORT-HORNED GRASSHOPPER" | ir_jd3 == "SHORT-HORNED GRASSHOPPER" | ir_jd4 == "SHORT-HORNED GRASSHOPPER" | ir_jd5 == "SHORT-HORNED GRASSHOPPER" | ir_jd6 == "SHORT-HORNED GRASSHOPPER" | dr_jd1 == "SHORT-HORNED GRASSHOPPER" | dr_jd2 == "SHORT-HORNED GRASSHOPPER" | dr_jd3 == "SHORT-HORNED GRASSHOPPER" | dr_jd4 == "SHORT-HORNED GRASSHOPPER"
@@ -228,7 +226,6 @@
 	replace LF_jd = 0 if LF_jd == .
 	replace PH_jd = 0 if PH_jd == .
 	replace Rat_jd = 0 if Rat_jd == .
-	replace RB_jd = 0 if RB_jd == .
 	replace RBug_jd = 0 if RBug_jd == .
 	replace Rodent_jd = 0 if Rodent_jd == .
 	replace SR_jd = 0 if SR_jd == .
