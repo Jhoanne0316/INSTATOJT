@@ -218,19 +218,91 @@
 	summarize slinv_wd- sdinv_wd if repvar_wd=="IR504"
 	summarize slinv_wd- sdinv_wd if repvar_wd=="IR85"
 	
+	********************************************************
+	*  				Number of traits invested  		
+	********************************************************
+	*WS, joint session
+	summarize traitsno_jw if repvar_jw =="PHKA RUMDOUL"
+	summarize traitsno_jw if repvar_jw=="IR504"
+	
+	*DS, joint session
+	summarize traitsno_jd if repvar_jd=="IR504"
+	summarize traitsno_jd if repvar_jd=="IR85"
 
+	*Wet Season, husband session
+	summarize traitsno_hw if repvar_hw =="PHKA RUMDOUL"
+	summarize traitsno_hw if repvar_hw=="IR504"
+	
+	*Dry Season, husband session
+	summarize traitsno_hd if repvar_hd=="IR504"
+	summarize traitsno_hd if repvar_hd=="IR85"
+
+	*Wet Season, wife session
+	summarize traitsno_ww if repvar_ww =="PHKA RUMDOUL"
+	summarize traitsno_ww if repvar_ww=="IR504"
+	
+	*Dry Season, wife session
+	summarize traitsno_wd if repvar_wd=="IR504"
+	summarize traitsno_wd if repvar_wd=="IR85"
+
+	********************************************************
+	*  					Percent invested		
+	********************************************************
+	
+	*WS, joint session
+	summarize totinv_jw if repvar_jw =="PHKA RUMDOUL"
+	summarize totinv_jw if repvar_jw=="IR504"
+	
+	*DS, joint session
+	summarize totinv_jd if repvar_jd=="IR504"
+	summarize totinv_jd if repvar_jd=="IR85"
+
+	*Wet Season, husband session
+	summarize totinv_hw if repvar_hw =="PHKA RUMDOUL"
+	summarize totinv_hw if repvar_hw=="IR504"
+	
+	*Dry Season, husband session
+	summarize totinv_hd if repvar_hd=="IR504"
+	summarize totinv_hd if repvar_hd=="IR85"
+
+	*Wet Season, wife session
+	summarize totinv_ww if repvar_ww =="PHKA RUMDOUL"
+	summarize totinv_ww if repvar_ww=="IR504"
+	
+	*Dry Season, wife session
+	summarize totinv_wd if repvar_wd=="IR504"
+	summarize totinv_wd if repvar_wd=="IR85"
+	
+	********************************************************
+	*  					Deterministic Return	
+	********************************************************
+	*WS, joint session
+	summarize dret_jw if repvar_jw =="PHKA RUMDOUL"
+	summarize dret_jw if repvar_jw=="IR504"
+	
+	*DS, joint session
+	summarize dret_jd if repvar_jd=="IR504"
+	summarize dret_jd if repvar_jd=="IR85"
+
+	*Wet Season, husband session
+	summarize dret_hw if repvar_hw =="PHKA RUMDOUL"
+	summarize dret_hw if repvar_hw=="IR504"
+	
+	*Dry Season, husband session
+	summarize dret_hd if repvar_hd=="IR504"
+	summarize dret_hd if repvar_hd=="IR85"
+
+	*Wet Season, wife session
+	summarize dret_ww if repvar_hw =="PHKA RUMDOUL"
+	summarize dret_ww if repvar_hw=="IR504"
+	
+	*Dry Season, wife session
+	summarize dret_wd if repvar_hd=="IR504"
+	summarize dret_wd if repvar_hd=="IR85"
 	
 * **********************************************************************
 * 5 - OTHER MATTERS
 * **********************************************************************
-
-* keep what we want, get rid of what we don't
-
-	
-*Arrange all the variables in the data with specific order" 
-
-
-	
 *labelling variables
 
 	label variable session "Session"
@@ -242,7 +314,7 @@
 	label variable market "Market Information"
 	label variable climate "Climate Information"
 	
-	*For wide data
+	
 	label variable slinv_hw "Investment shares for Slenderness (Husband - Wet Season)"
 	label variable uninv_hw "Investment shares for Unstickiness (Husband - Wet Season)"
 	label variable arinv_hw "Investment shares for Aroma (Husband - Wet Season)"
@@ -359,32 +431,6 @@
 	label variable dret_wd "Deterministic return (Wife - Dry Season)"
 	label variable dret_jd "Deterministic return (Joint - Dry Season)"
 	
-	/* For long data
-	label variable resp "Respondent and Season"
-	
-	label variable slinv "Investment shares for Slenderness"
-	label variable uninv "Investment shares for Unstickiness"
-	label variable arinv "Investment shares for Aroma"
-	label variable hrinv "Investment shares for Head Rice Recovery"
-	label variable ltinv "Investment shares for Lodging Tolerance"
-	label variable drinv "Investment shares for Disease Resistance"
-	label variable irinv "Investment shares for Insect Resistance"
-	label variable atinv "Investment shares for Abiotic Stress Tolerance"
-	label variable rsinv "Investment shares for Reduction to Shattering"
-	label variable eainv "Investment shares for Earliness"
-	label variable sdinv "Investment shares for Straw Digestibility"
-	
-	label variable remarks "Remarks"
-	
-	label variable repvar "Replacement Variety"
-	label variable cons "Disposal"
-	label variable grow "When it was Grown"
-	
-	label variable traitsno "Number of Traits Invested"
-	label variable totinv "Percent invested"
-	label variable dret "Deterministic return"
-	*/
-
 * **********************************************************************
 * 6 - PREPARING FOR EXPORT
 * **********************************************************************
