@@ -132,8 +132,16 @@
 * **********************************************************************
 
 *Wet Season
-	gen AW_jw = 1 if ir_jw1 == "ARMYWORM" | ir_jw2 == "ARMYWORM" | ir_jw3 == "ARMYWORM" | ir_jw4 == "ARMYWORM" | ir_jw5 == "ARMYWORM" | ir_jw6 == "ARMYWORM" | dr_jw1 == "ARMYWORM" | dr_jw2 == "ARMYWORM" | dr_jw3 == "ARMYWORM" | dr_jw4 == "ARMYWORM"
-	gen BBLIGHT_jw = 1 if ir_jw1 == "BACTERIAL BLIGHT" | ir_jw2 == "BACTERIAL BLIGHT" | ir_jw3 == "BACTERIAL BLIGHT" | ir_jw4 == "BACTERIAL BLIGHT" | ir_jw5 == "BACTERIAL BLIGHT" | ir_jw6 == "BACTERIAL BLIGHT" | dr_jw1 == "BACTERIAL BLIGHT" | dr_jw2 == "BACTERIAL BLIGHT" | dr_jw3 == "BACTERIAL BLIGHT" | dr_jw4 == "BACTERIAL BLIGHT"
+	gen AW_jw = 1 if ir_jw1 == "ARMYWORM" | ir_jw2 == "ARMYWORM" | ///
+	                 ir_jw3 == "ARMYWORM" | ir_jw4 == "ARMYWORM" | ///
+					 ir_jw5 == "ARMYWORM" | ir_jw6 == "ARMYWORM" | ///
+					 dr_jw1 == "ARMYWORM" | dr_jw2 == "ARMYWORM" | ///
+					 dr_jw3 == "ARMYWORM" | dr_jw4 == "ARMYWORM"
+	gen BBLIGHT_jw = 1 if ir_jw1 == "BACTERIAL BLIGHT" | ir_jw2 == "BACTERIAL BLIGHT" | ///
+	                      ir_jw3 == "BACTERIAL BLIGHT" | ir_jw4 == "BACTERIAL BLIGHT" | ///
+						  ir_jw5 == "BACTERIAL BLIGHT" | ir_jw6 == "BACTERIAL BLIGHT" | ///
+						  dr_jw1 == "BACTERIAL BLIGHT" | dr_jw2 == "BACTERIAL BLIGHT" | ///
+						  dr_jw3 == "BACTERIAL BLIGHT" | dr_jw4 == "BACTERIAL BLIGHT"
 	gen Blast_jw = 1 if ir_jw1 == "BLAST" | ir_jw2 == "BLAST" | ir_jw3 == "BLAST" | ir_jw4 == "BLAST" | ir_jw5 == "BLAST" | ir_jw6 == "BLAST" | dr_jw1 == "BLAST" | dr_jw2 == "BLAST" | dr_jw3 == "BLAST" | dr_jw4 == "BLAST"
 	gen CW_jw = 1 if ir_jw1 == "CASEWORM" | ir_jw2 == "CASEWORM" | ir_jw3 == "CASEWORM" | ir_jw4 == "CASEWORM" | ir_jw5 == "CASEWORM" | ir_jw6 == "CASEWORM" | dr_jw1 == "CASEWORM" | dr_jw2 == "CASEWORM" | dr_jw3 == "CASEWORM" | dr_jw4 == "CASEWORM"
 	gen Check_jw = 1 if ir_jw1 == "CHECK" | ir_jw2 == "CHECK" | ir_jw3 == "CHECK" | ir_jw4 == "CHECK" | ir_jw5 == "CHECK" | ir_jw6 == "CHECK" | dr_jw1 == "CHECK" | dr_jw2 == "CHECK" | dr_jw3 == "CHECK" | dr_jw4 == "CHECK"
@@ -358,10 +366,11 @@
 		
 	*insects and diseases dummy variables
 		label define yesno 1 "Yes" 0 "No"
-		label values  AW_jw yesno
-		label values  BBLIGHT_jw yesno
-		label values  Blast_jw yesno
-		label values  CW_jw yesno
+		label values  AW_jw BBLIGHT_jw Blast_jw CW_jw yesno
+		
+		/*
+		make this as one continuous syntax
+		*/
 		label values  Check_jw yesno
 		label values  Drought_jw yesno
 		label values  GM_jw yesno
@@ -457,7 +466,9 @@
 * **********************************************************************
 
 *Order variables in the dataset
-	order hhid session hh preyveng date morning market climate repvar_jw repvar_jd ir_jw1 ir_jw2 ir_jw3 ir_jw4 ir_jw5 ir_jw6 ir_jd1 ir_jd2 ir_jd3 ir_jd4 ir_jd5 ir_jd6 dr_jw1 dr_jw2 dr_jw3 dr_jw4 dr_jd1 dr_jd2 dr_jd3 dr_jd4  
+	order hhid session hh preyveng date morning market climate repvar_jw repvar_jd ///
+	      ir_jw1 ir_jw2 ir_jw3 ir_jw4 ir_jw5 ir_jw6 ir_jd1 ir_jd2 ir_jd3 ir_jd4 ir_jd5 ///
+		  ir_jd6 dr_jw1 dr_jw2 dr_jw3 dr_jw4 dr_jd1 dr_jd2 dr_jd3 dr_jd4  
 
 * **********************************************************************
 * 7 - PREPARING FOR EXPORT
