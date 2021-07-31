@@ -9,12 +9,9 @@
 	*Identify hhid for outliers and other flagged values 
 	*Add summary statistics for other variables (percentages for buyers)
 	
-	
-	
 * **********************************************************************
 * 0 - SETUP 
 * **********************************************************************
-	clear all 
 	
 *define directory paths
 
@@ -50,9 +47,15 @@
 	
 * renaming variables
 	rename id resid
+	
+	* *************************************
+	* 				VARIETY
+	* *************************************
+	
+	*Check variety
+	tab variety
 
-*clean variety
-
+	*clean variety
 	replace variety="ANGKORNG" if variety=="ANGKORNG"
 	replace variety="BANLAPDAV" if variety=="BANLAPDAV"
 	replace variety="CAR15" if variety=="CAR 15"
@@ -87,10 +90,23 @@
 	replace variety="SEN KRA OB" if variety=="SEN KRA OB"
 	replace variety="SEN PIDAO" if variety=="SEN PIDAO"
 	replace variety="SOMALI" if variety=="SOMALY"
+	
+	*recheck
+	tab variety
+	
+	* *************************************
+	* 				SEASON
+	* *************************************
+	
+	*check values
+	tab season
 
-*season value label 
+	*season value label 
 	label define L_season 1 "Early Wet" 2 "Wet" 3 "Dry"
 	label values season L_season
+	
+	*recheck
+	tab season
 	
 	*Generate season2 for only two groups
 		tab season
@@ -104,23 +120,47 @@
 		label values season2 L_season2
 		
 		*checker
-		tab season season2
-
-*year value label 
-	label define L_year 1 "2016" 2 "2017"
+		tab season season2 /*matches*/
+	
+	* *************************************
+	* 				YEAR
+	* *************************************
+	
+	*check values
+	tab year
+	
+	*year value label 
+	label define L_year 1 "2016" 2 "2017" 3 "2018"
 	label values year L_year
+	
+	*recheck
+	tab year
+	
+	* *************************************
+	* 				METHOD
+	* *************************************
 
-*method
+	*check values
 	tab method
 	
+	*destring
 	destring method, replace
+	
+	*define label
 	label define L_method 1 "Transplanted" 2 "Dry direct seeded" 3 "Wet direct seeded" 4 "Others"
+	
+	*label method
 	label values method L_method
 	
-*Source seed
+	*recheck 
+	tab method
+	
+	* *************************************
+	* 			Source of Seed
+	* *************************************
 	
 	*view/tabulate values 
-	tab source_seed
+	tab source_seed, m 
 
 	*Note possible typographical error 
 	note source_seed: values listed with respect with respect to hhid are possible errors since these answers pertains to 	variable seedtype
@@ -146,11 +186,16 @@
 	
 	*label value
 	label values source_seed L_source_seed
-			
-*Seed type 
+	
+	*recheck
+	tab source_seed, m 
+	
+	* *************************************
+	* 				Seed Type
+	* *************************************
 
 	*view/tabulate values 
-	tab seedtype,m
+	tab seedtype, m
 	
 	*Possible error of values in seedtype
 		note seedtype: values listed  with respect to hhid are possible errors since these answers pertains to 	variable source_seed
@@ -162,8 +207,7 @@
 	list seedtype hhid if seedtype ==  "NEIGHBOR"
 	list seedtype hhid if seedtype ==  "TRADER"
 	
-
-	*Check values of seed type
+	*Replace values
 	replace seedtype = "." if missing(seedtype) 
 	replace seedtype = "." in 28
 	replace seedtype = "." if seedtype == "?"
@@ -185,8 +229,13 @@
 		
 	*label values
 	label values seedtype L_seedtype
-
-*Buyer/s
+	
+	*recheck
+	tab seedtype, m
+	
+	* *************************************
+	* 				Buyers
+	* *************************************
 
 	*view/tabulate value of buyers
 	tab buyers, m
@@ -203,8 +252,13 @@
 	
 	*label buyers
 	label values buyers L_buyers
-
-*Reason
+	
+	*recheck
+	tab buyers, m
+	
+	* *************************************
+	* 				 Reason
+	* *************************************
 
 	*view/tabulate value of reason
 	tab reason, m
@@ -225,46 +279,30 @@
 	replace reason = "90" if reason == "820"
 	replace reason = "90" if reason == "0"
 	
+	*recheck 
+	tab reason, m
 	
 	*Multiple Responses 
 	split reason, parse(,) destring gen(reasons)
-	gen id = _n
-	
-	tab reason
-	tab reasons1 
-	tab reasons2
-	tab reasons3
-	
-	*label define
-	label define L_reason 1 "Known for long time" 2 "Contract production" 3 "Provides inputs/credit" 4 "Short distance" 5 "Convenient to sell" 6 "Come to house" 7 "Can sell even small quantity" 8 "Receive a good price" 9 "No time and space to dry rice" 10 "No enough warehouse to store rice" 90 "Others"
-	
-	*label reasons
-	label values reasons1-reasons3 L_reason
 	
 	*reshape reasons to long by id
+	gen id =_n
 	reshape long reasons, i(id) j(rea)
-	
-	*drop old reason and other generated variables
 	drop rea reason id
 	
-	*Notes:
-	note reasons: What to do with missing reasons?	
-	note reasons: values listed with respect to hhid are possible errors since these answers pertains are no under in any category according to the IGA manual
 
-	/*In case reshaping to wide is needed by reasons*/
-	*Reshape to wide	
-	gen act = 1
-	reshape wide rea, i(id) j(reason)
+	*label define
+	label define L_reason 1 "Known for long time" 2 "Contract production" 3 "Provides inputs/credit" 4 "Short distance" 5 "Convenient to sell" 6 "Come to house" 7 "Can sell even small quantity" 8 "Receive a good price" 9 "No time and space to dry rice" 10 "No enough warehouse to store rice" 90 "Others" 
 	
-	/*
+	*label reasons
+	label values reasons L_reason
 	
-	JY comment:
-	 output of reshape to wide : variable reasons contains missing values
-	 There is a need to return the data in its original shape with 605 cases. 
+	*Notes:
+	note reasons: values listed (720, 770, 820, 0) with respect to hhid are possible errors since these answers pertains are no under in any category according to the IGA manual
 	
-	*/
-	
-*Price
+	* *************************************
+	* 				Price
+	* *************************************
 
 	*view/tabulate values of price
 	tab price
@@ -275,7 +313,12 @@
 	*destring
 	destring price, replace 
 	
-*Distance in km
+	*recheck
+	tab price
+	
+	* *************************************
+	* 		Distance in Kilometers
+	* *************************************
 
 	*view/tabulate values of distance_km
 	tab distance_km
@@ -285,6 +328,9 @@
 	
 	*destring
 	destring distance_km, replace 
+	
+	*recheck
+	tab distance_km
 	
 * **********************************************************************
 * 3. EDITING BASED ON VALUES FROM OTHER VARIABLES 
@@ -357,33 +403,22 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 	
 	
 * **********************************************************************
-* 4 -OUTPUTS
-*   To Jacob: May I know when is the taghh var necessary? I did not run the 
-*             reshape syntax in line 244 and notice running the taghh 
-*             would only result to code=1. 
-*              
-*
+* 								4 -OUTPUTS
 * **********************************************************************
 *Flagging of values 
 
-	sort hhid
-
-	*by hhid
-	egen tagunique = tag(hhid)
-
-		*To know unique number of households 
-		tab tagunique if tagunique == 1
-		
-
-
 	*by hhid and variety
 	egen tagvar = tag(hhid variety)
+	/*This function tags just one observation in each group of identical values with value 1 and any other observations in the same 	group with value 0*/
 	
-		*To know unique number of households 
-		tab tagunique if tagvar == 1
-		
-		*To know reasons of selling per household
-		tab reason if tagvar== 1 
+	*Number of Unique variety planted per household
+	tab tagvar
+	tab hhid if tagvar ==1  
+	count if tagvar ==1
+	
+		*To know reasons of selling of variety
+		tab reasons 
+		tab variety reasons 
 		
 		*tabulation of variety by classif
 		tab variety classif if tagvar ==1 
@@ -396,31 +431,44 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 		
 		*Percentage of method
 		tab method if tagvar ==1 
+		tab variety method if tagvar == 1
 		
 		*Percentage of source_seed
 		tab source_seed if tagvar ==1 
 		
 		*Percentage of seedtype
 		tab seedtype if tagvar ==1 
+		tab variety seedtype if tagvar ==1 
 		
-	*by hhid season and variety
+		*amount seed*
+		tab amt_seed variety if tagvar ==1 
+		
+	*tag varieties per season to avoid double counting of varieties per household
+	note: taghh: The goal is to count the farmers who planted the specific variety per season, regardless of year. For example, one farmer planted I504 during dry season for 2017 and 2018. We only count it as one since we are not interested in year. 
+	
 	egen taghh= tag(hhid season2 variety) 
-		
+	/*This function tags just one observation in each group of identical values with value 1 and any other observations in the same group with value 0*/
+	
+	
+		*Number of Unique variety planted per season and household 
+		tab taghh
+		tab hhid if taghh ==1  
+		count if taghh ==1
+	
 		*Count how many households planted IR504 during Wet Season
 		count if season2 == 1 & variety == "IR504" & taghh ==1
-		
-	
 		
 		*Count how many households planted IR504 during Dry Season
 		count if season2 == 2 & variety == "IR504" & taghh ==1
 
 		*tabulation of variety by season2 per hhid 
-			tab variety season2 if taghh == 1
-			
-		/*recommendation: use tab to check with other categories for efficiency	*/
-			
-			tab taghh season2 if variety == "IR504" & taghh ==1
-			
+		tab variety season2 if taghh == 1
+		bysort season2: tab variety if taghh==1 
+		
+		*tabulation of source_seed per season2
+		tab season2 source_seed if taghh ==1
+		bysort season2: tab source_seed if taghh ==1
+					
 	
 	********************************************************
 	* 					Variety Area Share 
@@ -505,11 +553,11 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 * **********************************************************************
 	
 * keep what we want, get rid of what we don't
-	drop weightunit u checker prod sold_kg season areaplanted taghh tagvar tagunique
+	drop weightunit u checker prod sold_kg season areaplanted taghh tagvar 
 	note: prod, Sold_kg, areaplanted  is the same with Conv_prod, Conv_sold and Conv_area respectively
 	 
 *Arrange all the variables in the data with specific order" 
-	order resid session hh hhid classif variety season2 year method source_seed seedtype buyers reason price amt_seed per_sold distance_km areaunit conv_area conv_prod conv_sold yield
+	order resid session hh hhid classif variety season2 year method source_seed seedtype buyers reasons price amt_seed per_sold distance_km areaunit conv_area conv_prod conv_sold yield
 	
 *labelling variables
 
@@ -542,15 +590,15 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 * **********************************************************************
 
 *Identify and report duplicates with  categories*
-	sort resid session hh hhid 
-	unique resid session hh hhid 
-	duplicates report resid session hh hhid 
+	sort resid session hh hhid variety season2 year 
+	unique resid session hh hhid variety season2 year 
+	duplicates report resid session hh hhid variety season2 year 
 
 *Drop duplicate observations to avoid double-counting of varieties planted per household
-	duplicates drop resid session hh hhid, force
+	duplicates drop resid session hh hhid variety season2 year, force
 
 *Check whether these variables uniquely identify the observations*
-	isid				resid session hh hhid 
+	isid resid session hh hhid variety season2 year
 	
 *Describe dataset
 	compress
@@ -558,7 +606,7 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 	summarize 
 	
 *Sort the data
-	sort 				resid session hh hhid
+	sort resid session hh hhid
 *Saving the dataset	
 	save "$export/3b_varplanted_final", replace
 
