@@ -120,126 +120,130 @@
 	replace dr_jd= "TUNGRO" if dr_jd== "TUNGOR"
 	replace dr_jd= "PLANTHOPPER" if dr_jd== "BROWN PLANTHOPPER"
 	replace dr_jd= "THRIPS" if dr_jd== "THIRP"
+	
+	
+*Reshape back to wide
+	reshape wide
+	drop dr_jw5 dr_jd5 dr_jw6 dr_jd6
+
 
 * **********************************************************************
 * 3 -	DUMMY VARIABLES FOR INSECTS AND DISEASES
 * **********************************************************************
-	
-*Wet season
-	gen AW_jw = 1 if ir_jw == "ARMYWORM" | dr_jw == "ARMYWORM"
-	gen BBLIGHT_jw = 1 if ir_jw == "BACTERIAL BLIGHT" | dr_jw == "BACTERIAL BLIGHT"
-	gen Blast_jw = 1 if ir_jw == "BLAST" | dr_jw == "BLAST"
-	gen CW_jw = 1 if ir_jw == "CASEWORM" | dr_jw == "CASEWORM"
-	gen Check_jw = 1 if ir_jw == "CHECK" | dr_jw == "CHECK"
-	gen Drought_jw = 1 if ir_jw == "DROUGHT" | dr_jw == "DROUGHT"
-	gen GM_jw = 1 if ir_jw == "GALL MIDGE" | dr_jw == "GALL MIDGE"
-	gen GAS_jw = 1 if ir_jw == "GOLDEN APPLE SNAIL" | dr_jw == "GOLDEN APPLE SNAIL"
-	gen LF_jw = 1 if ir_jw == "LEAF FOLDER" | dr_jw == "LEAF FOLDER"
-	gen PH_jw = 1 if ir_jw == "PLANTHOPPER" | dr_jw == "PLANTHOPPER"
-	gen Rat_jw = 1 if ir_jw == "RAT" | dr_jw == "RAT"
-	gen RB_jw = 1 if ir_jw == "RICE BLAST" | dr_jw == "RICE BLAST"
-	gen RBug_jw = 1 if ir_jw == "RICE BUG" | dr_jw == "RICE BUG"
-	gen Rodent_jw = 1 if ir_jw == "RODENT" | dr_jw == "RODENT"
-	gen SR_jw = 1 if ir_jw == "SHEATH ROT" | dr_jw == "SHEATH ROT"
-	gen SHGH_jw = 1 if ir_jw == "SHORT-HORNED GRASSHOPPER" | dr_jw == "SHORT-HORNED GRASSHOPPER"
-	gen SB_jw = 1 if ir_jw == "STEM BORER" | dr_jw == "STEM BORER"
-	gen SM_jw = 1 if ir_jw == "SUBMERGENCE" | dr_jw == "SUBMERGENCE"
-	gen Thrips_jw = 1 if ir_jw == "THRIPS" | dr_jw == "THRIPS"
-	gen BLS_jw = 1 if ir_jw == "BACTERIAL LEAF STREAK" | dr_jw == "BACTERIAL LEAF STREAK"
-	gen BS_jw = 1 if ir_jw == "BROWN SPOT" | dr_jw == "BROWN SPOT"
-	gen GS_jw = 1 if ir_jw == "GRASSY STOUT" | dr_jw == "GRASSY STOUT"
-	gen NB_jw = 1 if ir_jw == "NECK BLAST" | dr_jw == "NECK BLAST"
-	gen RS_jw = 1 if ir_jw == "RAGGED STUNT" | dr_jw == "RAGGED STUNT"
-	gen SBLIGHT_jw = 1 if ir_jw == "SHEATH BLIGHT" | dr_jw == "SHEATH BLIGHT"
-	gen SP_jw = 1 if ir_jw == "SHEATH PANICLE" | dr_jw == "SHEATH PANICLE"
-	gen Tungro_jw = 1 if ir_jw == "TUNGRO" | dr_jw == "TUNGRO"
-		
-	replace AW_jw = 0 if ir_jw != "ARMYWORM" | dr_jw != "ARMYWORM"
-	replace BBLIGHT_jw = 0 if ir_jw != "BACTERIAL BLIGHT" | dr_jw != "BACTERIAL BLIGHT"
-	replace Blast_jw = 0 if ir_jw != "BLAST" | dr_jw != "BLAST"
-	replace CW_jw = 0 if ir_jw != "CASEWORM" | dr_jw != "CASEWORM"
-	replace Check_jw = 0 if ir_jw != "CHECK" | dr_jw != "CHECK"
-	replace Drought_jw = 0 if ir_jw != "DROUGHT" | dr_jw != "DROUGHT"
-	replace GM_jw = 0 if ir_jw != "GALL MIDGE" | dr_jw != "GALL MIDGE"
-	replace GAS_jw = 0 if ir_jw != "GOLDEN APPLE SNAIL" | dr_jw != "GOLDEN APPLE SNAIL"
-	replace LF_jw = 0 if ir_jw != "LEAF FOLDER" | dr_jw != "LEAF FOLDER"
-	replace PH_jw = 0 if ir_jw != "PLANTHOPPER" | dr_jw != "PLANTHOPPER"
-	replace Rat_jw = 0 if ir_jw != "RAT" | dr_jw != "RAT"
-	replace RB_jw = 0 if ir_jw != "RICE BLAST" | dr_jw != "RICE BLAST"
-	replace RBug_jw = 0 if ir_jw != "RICE BUG" | dr_jw != "RICE BUG"
-	replace Rodent_jw = 0 if ir_jw != "RODENT" | dr_jw != "RODENT"
-	replace SR_jw = 0 if ir_jw != "SHEATH ROT" | dr_jw != "SHEATH ROT"
-	replace SHGH_jw = 0 if ir_jw != "SHORT-HORNED GRASSHOPPER" | dr_jw != "SHORT-HORNED GRASSHOPPER"
-	replace SB_jw = 0 if ir_jw != "STEM BORER" | dr_jw != "STEM BORER"
-	replace SM_jw = 0 if ir_jw != "SUBMERGENCE" | dr_jw != "SUBMERGENCE"
-	replace Thrips_jw = 0 if ir_jw != "THRIPS" | dr_jw != "THRIPS"
-	replace BLS_jw = 0 if ir_jw != "BACTERIAL LEAF STREAK" | dr_jw != "BACTERIAL LEAF STREAK"
-	replace BS_jw = 0 if ir_jw != "BROWN SPOT" | dr_jw != "BROWN SPOT"
-	replace GS_jw = 0 if ir_jw != "GRASSY STOUT" | dr_jw != "GRASSY STOUT"
-	replace NB_jw = 0 if ir_jw != "NECK BLAST" | dr_jw != "NECK BLAST"
-	replace RS_jw = 0 if ir_jw != "RAGGED STUNT" | dr_jw != "RAGGED STUNT"
-	replace SBLIGHT_jw = 0 if ir_jw != "SHEATH BLIGHT" | dr_jw != "SHEATH BLIGHT"
-	replace SP_jw = 0 if ir_jw != "SHEATH PANICLE" | dr_jw != "SHEATH PANICLE"
-	replace Tungro_jw = 0 if ir_jw != "TUNGRO" | dr_jw != "TUNGRO"
-	
-*Dry season
-	gen AW_jd = 1 if ir_jd == "ARMYWORM" | dr_jd == "ARMYWORM"
-	gen BB_jd = 1 if ir_jd == "BACTERIAL BLIGHT" | dr_jd == "BACTERIAL BLIGHT"
-	gen Blast_jd = 1 if ir_jd == "BLAST" | dr_jd == "BLAST"
-	gen CW_jd = 1 if ir_jd == "CASEWORM" | dr_jd == "CASEWORM"
-	gen Check_jd = 1 if ir_jd == "CHECK" | dr_jd == "CHECK"
-	gen Drought_jd = 1 if ir_jd == "DROUGHT" | dr_jd == "DROUGHT"
-	gen GM_jd = 1 if ir_jd == "GALL MIDGE" | dr_jd == "GALL MIDGE"
-	gen GAS_jd = 1 if ir_jd == "GOLDEN APPLE SNAIL" | dr_jd == "GOLDEN APPLE SNAIL"
-	gen LF_jd = 1 if ir_jd == "LEAF FOLDER" | dr_jd == "LEAF FOLDER"
-	gen PH_jd = 1 if ir_jd == "PLANTHOPPER" | dr_jd == "PLANTHOPPER"
-	gen Rat_jd = 1 if ir_jd == "RAT" | dr_jd == "RAT"
-	gen RB_jd = 1 if ir_jd == "RICE BLAST" | dr_jd == "RICE BLAST"
-	gen RBug_jd = 1 if ir_jd == "RICE BUG" | dr_jd == "RICE BUG"
-	gen Rodent_jd = 1 if ir_jd == "RODENT" | dr_jd == "RODENT"
-	gen SR_jd = 1 if ir_jd == "SHEATH ROT" | dr_jd == "SHEATH ROT"
-	gen SHGH_jd = 1 if ir_jd == "SHORT-HORNED GRASSHOPPER" | dr_jd == "SHORT-HORNED GRASSHOPPER"
-	gen SB_jd = 1 if ir_jd == "STEM BORER" | dr_jd == "STEM BORER"
-	gen SM_jd = 1 if ir_jd == "SUBMERGENCE" | dr_jd == "SUBMERGENCE"
-	gen Thrips_jd = 1 if ir_jd == "THRIPS" | dr_jd == "THRIPS"
-	gen BLS_jd = 1 if ir_jd == "BACTERIAL LEAF STREAK" | dr_jd == "BACTERIAL LEAF STREAK"
-	gen BS_jd = 1 if ir_jd == "BROWN SPOT" | dr_jd == "BROWN SPOT"
-	gen GS_jd = 1 if ir_jd == "GRASSY STOUT" | dr_jd == "GRASSY STOUT"
-	gen NB_jd = 1 if ir_jd == "NECK BLAST" | dr_jd == "NECK BLAST"
-	gen RS_jd = 1 if ir_jd == "RAGGED STUNT" | dr_jd == "RAGGED STUNT"
-	gen SBLIGHT_jd = 1 if ir_jd == "SHEATH BLIGHT" | dr_jd == "SHEATH BLIGHT"
-	gen SP_jd = 1 if ir_jd == "SHEATH PANICLE" | dr_jd == "SHEATH PANICLE"
-	gen Tungro_jd = 1 if ir_jd == "TUNGRO" | dr_jd == "TUNGRO"
 
-	replace AW_jd = 0 if ir_jd != "ARMYWORM" | dr_jd != "ARMYWORM"
-	replace BB_jd = 0 if ir_jd != "BACTERIAL BLIGHT" | dr_jd != "BACTERIAL BLIGHT"
-	replace Blast_jd = 0 if ir_jd != "BLAST" | dr_jd != "BLAST"
-	replace CW_jd = 0 if ir_jd != "CASEWORM" | dr_jd != "CASEWORM"
-	replace Check_jd = 0 if ir_jd != "CHECK" | dr_jd != "CHECK"
-	replace Drought_jd = 0 if ir_jd != "DROUGHT" | dr_jd != "DROUGHT"
-	replace GM_jd = 0 if ir_jd != "GALL MIDGE" | dr_jd != "GALL MIDGE"
-	replace GAS_jd = 0 if ir_jd != "GOLDEN APPLE SNAIL" | dr_jd != "GOLDEN APPLE SNAIL"
-	replace LF_jd = 0 if ir_jd != "LEAF FOLDER" | dr_jd != "LEAF FOLDER"
-	replace PH_jd = 0 if ir_jd != "PLANTHOPPER" | dr_jd != "PLANTHOPPER"
-	replace Rat_jd = 0 if ir_jd != "RAT" | dr_jd != "RAT"
-	replace RB_jd = 0 if ir_jd != "RICE BLAST" | dr_jd != "RICE BLAST"
-	replace RBug_jd = 0 if ir_jd != "RICE BUG" | dr_jd != "RICE BUG"
-	replace Rodent_jd = 0 if ir_jd != "RODENT" | dr_jd != "RODENT"
-	replace SR_jd = 0 if ir_jd != "SHEATH ROT" | dr_jd != "SHEATH ROT"
-	replace SHGH_jd = 0 if ir_jd != "SHORT-HORNED GRASSHOPPER" | dr_jd != "SHORT-HORNED GRASSHOPPER"
-	replace SB_jd = 0 if ir_jd != "STEM BORER" | dr_jd != "STEM BORER"
-	replace SM_jd = 0 if ir_jd != "SUBMERGENCE" | dr_jd != "SUBMERGENCE"
-	replace Thrips_jd = 0 if ir_jd != "THRIPS" | dr_jd != "THRIPS"
-	replace BLS_jd = 0 if ir_jd != "BACTERIAL LEAF STREAK" | dr_jd != "BACTERIAL LEAF STREAK"
-	replace BS_jd = 0 if ir_jd != "BROWN SPOT" | dr_jd != "BROWN SPOT"
-	replace GS_jd = 0 if ir_jd != "GRASSY STOUT" | dr_jd != "GRASSY STOUT"
-	replace NB_jd = 0 if ir_jd != "NECK BLAST" | dr_jd != "NECK BLAST"
-	replace RS_jd = 0 if ir_jd != "RAGGED STUNT" | dr_jd != "RAGGED STUNT"
-	replace SBLIGHT_jd = 0 if ir_jd != "SHEATH BLIGHT" | dr_jd != "SHEATH BLIGHT"
-	replace SP_jd = 0 if ir_jd != "SHEATH PANICLE" | dr_jd != "SHEATH PANICLE"
-	replace Tungro_jd = 0 if ir_jd != "TUNGRO" | dr_jd != "TUNGRO"
+*Wet Season
+	gen AW_jw = 1 if ir_jw1 == "ARMYWORM" | ir_jw2 == "ARMYWORM" | ir_jw3 == "ARMYWORM" | ir_jw4 == "ARMYWORM" | ir_jw5 == "ARMYWORM" | ir_jw6 == "ARMYWORM" | dr_jw1 == "ARMYWORM" | dr_jw2 == "ARMYWORM" | dr_jw3 == "ARMYWORM" | dr_jw4 == "ARMYWORM"
+	gen BBLIGHT_jw = 1 if ir_jw1 == "BACTERIAL BLIGHT" | ir_jw2 == "BACTERIAL BLIGHT" | ir_jw3 == "BACTERIAL BLIGHT" | ir_jw4 == "BACTERIAL BLIGHT" | ir_jw5 == "BACTERIAL BLIGHT" | ir_jw6 == "BACTERIAL BLIGHT" | dr_jw1 == "BACTERIAL BLIGHT" | dr_jw2 == "BACTERIAL BLIGHT" | dr_jw3 == "BACTERIAL BLIGHT" | dr_jw4 == "BACTERIAL BLIGHT"
+	gen Blast_jw = 1 if ir_jw1 == "BLAST" | ir_jw2 == "BLAST" | ir_jw3 == "BLAST" | ir_jw4 == "BLAST" | ir_jw5 == "BLAST" | ir_jw6 == "BLAST" | dr_jw1 == "BLAST" | dr_jw2 == "BLAST" | dr_jw3 == "BLAST" | dr_jw4 == "BLAST"
+	gen CW_jw = 1 if ir_jw1 == "CASEWORM" | ir_jw2 == "CASEWORM" | ir_jw3 == "CASEWORM" | ir_jw4 == "CASEWORM" | ir_jw5 == "CASEWORM" | ir_jw6 == "CASEWORM" | dr_jw1 == "CASEWORM" | dr_jw2 == "CASEWORM" | dr_jw3 == "CASEWORM" | dr_jw4 == "CASEWORM"
+	gen Check_jw = 1 if ir_jw1 == "CHECK" | ir_jw2 == "CHECK" | ir_jw3 == "CHECK" | ir_jw4 == "CHECK" | ir_jw5 == "CHECK" | ir_jw6 == "CHECK" | dr_jw1 == "CHECK" | dr_jw2 == "CHECK" | dr_jw3 == "CHECK" | dr_jw4 == "CHECK"
+	gen Drought_jw = 1 if ir_jw1 == "DROUGHT" | ir_jw2 == "DROUGHT" | ir_jw3 == "DROUGHT" | ir_jw4 == "DROUGHT" | ir_jw5 == "DROUGHT" | ir_jw6 == "DROUGHT" | dr_jw1 == "DROUGHT" | dr_jw2 == "DROUGHT" | dr_jw3 == "DROUGHT" | dr_jw4 == "DROUGHT"
+	gen GM_jw = 1 if ir_jw1 == "GALL MIDGE" | ir_jw2 == "GALL MIDGE" | ir_jw3 == "GALL MIDGE" | ir_jw4 == "GALL MIDGE" | ir_jw5 == "GALL MIDGE" | ir_jw6 == "GALL MIDGE" | dr_jw1 == "GALL MIDGE" | dr_jw2 == "GALL MIDGE" | dr_jw3 == "GALL MIDGE" | dr_jw4 == "GALL MIDGE"
+	gen GAS_jw = 1 if ir_jw1 == "GOLDEN APPLE SNAIL" | ir_jw2 == "GOLDEN APPLE SNAIL" | ir_jw3 == "GOLDEN APPLE SNAIL" | ir_jw4 == "GOLDEN APPLE SNAIL" | ir_jw5 == "GOLDEN APPLE SNAIL" | ir_jw6 == "GOLDEN APPLE SNAIL" | dr_jw1 == "GOLDEN APPLE SNAIL" | dr_jw2 == "GOLDEN APPLE SNAIL" | dr_jw3 == "GOLDEN APPLE SNAIL" | dr_jw4 == "GOLDEN APPLE SNAIL"
+	gen LF_jw = 1 if ir_jw1 == "LEAF FOLDER" | ir_jw2 == "LEAF FOLDER" | ir_jw3 == "LEAF FOLDER" | ir_jw4 == "LEAF FOLDER" | ir_jw5 == "LEAF FOLDER" | ir_jw6 == "LEAF FOLDER" | dr_jw1 == "LEAF FOLDER" | dr_jw2 == "LEAF FOLDER" | dr_jw3 == "LEAF FOLDER" | dr_jw4 == "LEAF FOLDER"
+	gen PH_jw = 1 if ir_jw1 == "PLANTHOPPER" | ir_jw2 == "PLANTHOPPER" | ir_jw3 == "PLANTHOPPER" | ir_jw4 == "PLANTHOPPER" | ir_jw5 == "PLANTHOPPER" | ir_jw6 == "PLANTHOPPER" | dr_jw1 == "PLANTHOPPER" | dr_jw2 == "PLANTHOPPER" | dr_jw3 == "PLANTHOPPER" | dr_jw4 == "PLANTHOPPER"
+	gen Rat_jw = 1 if ir_jw1 == "RAT" | ir_jw2 == "RAT" | ir_jw3 == "RAT" | ir_jw4 == "RAT" | ir_jw5 == "RAT" | ir_jw6 == "RAT" | dr_jw1 == "RAT" | dr_jw2 == "RAT" | dr_jw3 == "RAT" | dr_jw4 == "RAT"
+	gen RB_jw = 1 if ir_jw1 == "RICE BLAST" | ir_jw2 == "RICE BLAST" | ir_jw3 == "RICE BLAST" | ir_jw4 == "RICE BLAST" | ir_jw5 == "RICE BLAST" | ir_jw6 == "RICE BLAST" | dr_jw1 == "RICE BLAST" | dr_jw2 == "RICE BLAST" | dr_jw3 == "RICE BLAST" | dr_jw4 == "RICE BLAST"
+	gen RBug_jw = 1 if ir_jw1 == "RICE BUG" | ir_jw2 == "RICE BUG" | ir_jw3 == "RICE BUG" | ir_jw4 == "RICE BUG" | ir_jw5 == "RICE BUG" | ir_jw6 == "RICE BUG" | dr_jw1 == "RICE BUG" | dr_jw2 == "RICE BUG" | dr_jw3 == "RICE BUG" | dr_jw4 == "RICE BUG"
+	gen Rodent_jw = 1 if ir_jw1 == "RODENT" | ir_jw2 == "RODENT" | ir_jw3 == "RODENT" | ir_jw4 == "RODENT" | ir_jw5 == "RODENT" | ir_jw6 == "RODENT" | dr_jw1 == "RODENT" | dr_jw2 == "RODENT" | dr_jw3 == "RODENT" | dr_jw4 == "RODENT"
+	gen SR_jw = 1 if ir_jw1 == "SHEATH ROT" | ir_jw2 == "SHEATH ROT" | ir_jw3 == "SHEATH ROT" | ir_jw4 == "SHEATH ROT" | ir_jw5 == "SHEATH ROT" | ir_jw6 == "SHEATH ROT" | dr_jw1 == "SHEATH ROT" | dr_jw2 == "SHEATH ROT" | dr_jw3 == "SHEATH ROT" | dr_jw4 == "SHEATH ROT"
+	gen SHGH_jw = 1 if ir_jw1 == "SHORT-HORNED GRASSHOPPER" | ir_jw2 == "SHORT-HORNED GRASSHOPPER" | ir_jw3 == "SHORT-HORNED GRASSHOPPER" | ir_jw4 == "SHORT-HORNED GRASSHOPPER" | ir_jw5 == "SHORT-HORNED GRASSHOPPER" | ir_jw6 == "SHORT-HORNED GRASSHOPPER" | dr_jw1 == "SHORT-HORNED GRASSHOPPER" | dr_jw2 == "SHORT-HORNED GRASSHOPPER" | dr_jw3 == "SHORT-HORNED GRASSHOPPER" | dr_jw4 == "SHORT-HORNED GRASSHOPPER"
+	gen SB_jw = 1 if ir_jw1 == "STEM BORER" | ir_jw2 == "STEM BORER" | ir_jw3 == "STEM BORER" | ir_jw4 == "STEM BORER" | ir_jw5 == "STEM BORER" | ir_jw6 == "STEM BORER" | dr_jw1 == "STEM BORER" | dr_jw2 == "STEM BORER" | dr_jw3 == "STEM BORER" | dr_jw4 == "STEM BORER"
+	gen SM_jw = 1 if ir_jw1 == "SUBMERGENCE" | ir_jw2 == "SUBMERGENCE" | ir_jw3 == "SUBMERGENCE" | ir_jw4 == "SUBMERGENCE" | ir_jw5 == "SUBMERGENCE" | ir_jw6 == "SUBMERGENCE" | dr_jw1 == "SUBMERGENCE" | dr_jw2 == "SUBMERGENCE" | dr_jw3 == "SUBMERGENCE" | dr_jw4 == "SUBMERGENCE"
+	gen Thrips_jw = 1 if ir_jw1 == "THRIPS" | ir_jw2 == "THRIPS" | ir_jw3 == "THRIPS" | ir_jw4 == "THRIPS" | ir_jw5 == "THRIPS" | ir_jw6 == "THRIPS" | dr_jw1 == "THRIPS" | dr_jw2 == "THRIPS" | dr_jw3 == "THRIPS" | dr_jw4 == "THRIPS"
+	gen BLS_jw = 1 if ir_jw1 == "BACTERIAL LEAF STREAK" | ir_jw2 == "BACTERIAL LEAF STREAK" | ir_jw3 == "BACTERIAL LEAF STREAK" | ir_jw4 == "BACTERIAL LEAF STREAK" | ir_jw5 == "BACTERIAL LEAF STREAK" | ir_jw6 == "BACTERIAL LEAF STREAK" | dr_jw1 == "BACTERIAL LEAF STREAK" | dr_jw2 == "BACTERIAL LEAF STREAK" | dr_jw3 == "BACTERIAL LEAF STREAK" | dr_jw4 == "BACTERIAL LEAF STREAK"
+	gen BS_jw = 1 if ir_jw1 == "BROWN SPOT" | ir_jw2 == "BROWN SPOT" | ir_jw3 == "BROWN SPOT" | ir_jw4 == "BROWN SPOT" | ir_jw5 == "BROWN SPOT" | ir_jw6 == "BROWN SPOT" | dr_jw1 == "BROWN SPOT" | dr_jw2 == "BROWN SPOT" | dr_jw3 == "BROWN SPOT" | dr_jw4 == "BROWN SPOT"
+	gen GS_jw = 1 if ir_jw1 == "GRASSY STOUT" | ir_jw2 == "GRASSY STOUT" | ir_jw3 == "GRASSY STOUT" | ir_jw4 == "GRASSY STOUT" | ir_jw5 == "GRASSY STOUT" | ir_jw6 == "GRASSY STOUT" | dr_jw1 == "GRASSY STOUT" | dr_jw2 == "GRASSY STOUT" | dr_jw3 == "GRASSY STOUT" | dr_jw4 == "GRASSY STOUT"
+	gen NB_jw = 1 if ir_jw1 == "NECK BLAST" | ir_jw2 == "NECK BLAST" | ir_jw3 == "NECK BLAST" | ir_jw4 == "NECK BLAST" | ir_jw5 == "NECK BLAST" | ir_jw6 == "NECK BLAST" | dr_jw1 == "NECK BLAST" | dr_jw2 == "NECK BLAST" | dr_jw3 == "NECK BLAST" | dr_jw4 == "NECK BLAST"
+	gen RS_jw = 1 if ir_jw1 == "RAGGED STUNT" | ir_jw2 == "RAGGED STUNT" | ir_jw3 == "RAGGED STUNT" | ir_jw4 == "RAGGED STUNT" | ir_jw5 == "RAGGED STUNT" | ir_jw6 == "RAGGED STUNT" | dr_jw1 == "RAGGED STUNT" | dr_jw2 == "RAGGED STUNT" | dr_jw3 == "RAGGED STUNT" | dr_jw4 == "RAGGED STUNT"
+	gen SBLIGHT_jw = 1 if ir_jw1 == "SHEATH BLIGHT" | ir_jw2 == "SHEATH BLIGHT" | ir_jw3 == "SHEATH BLIGHT" | ir_jw4 == "SHEATH BLIGHT" | ir_jw5 == "SHEATH BLIGHT" | ir_jw6 == "SHEATH BLIGHT" | dr_jw1 == "SHEATH BLIGHT" | dr_jw2 == "SHEATH BLIGHT" | dr_jw3 == "SHEATH BLIGHT" | dr_jw4 == "SHEATH BLIGHT"
+	gen SP_jw = 1 if ir_jw1 == "SHEATH PANICLE" | ir_jw2 == "SHEATH PANICLE" | ir_jw3 == "SHEATH PANICLE" | ir_jw4 == "SHEATH PANICLE" | ir_jw5 == "SHEATH PANICLE" | ir_jw6 == "SHEATH PANICLE" | dr_jw1 == "SHEATH PANICLE" | dr_jw2 == "SHEATH PANICLE" | dr_jw3 == "SHEATH PANICLE" | dr_jw4 == "SHEATH PANICLE"
+	gen Tungro_jw = 1 if ir_jw1 == "TUNGRO" | ir_jw2 == "TUNGRO" | ir_jw3 == "TUNGRO" | ir_jw4 == "TUNGRO" | ir_jw5 == "TUNGRO" | ir_jw6 == "TUNGRO" | dr_jw1 == "TUNGRO" | dr_jw2 == "TUNGRO" | dr_jw3 == "TUNGRO" | dr_jw4 == "TUNGRO"
+
+	replace AW_jw = 0 if AW_jw == .
+	replace BBLIGHT_jw = 0 if BBLIGHT_jw == .
+	replace Blast_jw = 0 if Blast_jw == .
+	replace CW_jw = 0 if CW_jw == .
+	replace Check_jw = 0 if Check_jw == .
+	replace Drought_jw = 0 if Drought_jw == .
+	replace GM_jw = 0 if GM_jw == .
+	replace GAS_jw = 0 if GAS_jw == .
+	replace LF_jw = 0 if LF_jw == .
+	replace PH_jw = 0 if PH_jw == .
+	replace Rat_jw = 0 if Rat_jw == .
+	replace RB_jw = 0 if RB_jw == .
+	replace RBug_jw = 0 if RBug_jw == .
+	replace Rodent_jw = 0 if Rodent_jw == .
+	replace SR_jw = 0 if SR_jw == .
+	replace SHGH_jw = 0 if SHGH_jw == .
+	replace SB_jw = 0 if SB_jw == .
+	replace SM_jw = 0 if SM_jw == .
+	replace Thrips_jw = 0 if Thrips_jw == .
+	replace BLS_jw = 0 if BLS_jw == .
+	replace BS_jw = 0 if BS_jw == .
+	replace GS_jw = 0 if GS_jw == .
+	replace NB_jw = 0 if NB_jw == .
+	replace RS_jw = 0 if RS_jw == .
+	replace SBLIGHT_jw = 0 if SBLIGHT_jw == .
+	replace SP_jw = 0 if SP_jw == .
+	replace Tungro_jw = 0 if Tungro_jw == .
 	
-	
+*Dry Season
+	gen AW_jd = 1 if ir_jd1 == "ARMYWORM" | ir_jd2 == "ARMYWORM" | ir_jd3 == "ARMYWORM" | ir_jd4 == "ARMYWORM" | ir_jd5 == "ARMYWORM" | ir_jd6 == "ARMYWORM" | dr_jd1 == "ARMYWORM" | dr_jd2 == "ARMYWORM" | dr_jd3 == "ARMYWORM" | dr_jd4 == "ARMYWORM"
+	gen BBLIGHT_jd = 1 if ir_jd1 == "BACTERIAL BLIGHT" | ir_jd2 == "BACTERIAL BLIGHT" | ir_jd3 == "BACTERIAL BLIGHT" | ir_jd4 == "BACTERIAL BLIGHT" | ir_jd5 == "BACTERIAL BLIGHT" | ir_jd6 == "BACTERIAL BLIGHT" | dr_jd1 == "BACTERIAL BLIGHT" | dr_jd2 == "BACTERIAL BLIGHT" | dr_jd3 == "BACTERIAL BLIGHT" | dr_jd4 == "BACTERIAL BLIGHT"
+	gen Blast_jd = 1 if ir_jd1 == "BLAST" | ir_jd2 == "BLAST" | ir_jd3 == "BLAST" | ir_jd4 == "BLAST" | ir_jd5 == "BLAST" | ir_jd6 == "BLAST" | dr_jd1 == "BLAST" | dr_jd2 == "BLAST" | dr_jd3 == "BLAST" | dr_jd4 == "BLAST"
+	gen CW_jd = 1 if ir_jd1 == "CASEWORM" | ir_jd2 == "CASEWORM" | ir_jd3 == "CASEWORM" | ir_jd4 == "CASEWORM" | ir_jd5 == "CASEWORM" | ir_jd6 == "CASEWORM" | dr_jd1 == "CASEWORM" | dr_jd2 == "CASEWORM" | dr_jd3 == "CASEWORM" | dr_jd4 == "CASEWORM"
+	gen Check_jd = 1 if ir_jd1 == "CHECK" | ir_jd2 == "CHECK" | ir_jd3 == "CHECK" | ir_jd4 == "CHECK" | ir_jd5 == "CHECK" | ir_jd6 == "CHECK" | dr_jd1 == "CHECK" | dr_jd2 == "CHECK" | dr_jd3 == "CHECK" | dr_jd4 == "CHECK"
+	gen Drought_jd = 1 if ir_jd1 == "DROUGHT" | ir_jd2 == "DROUGHT" | ir_jd3 == "DROUGHT" | ir_jd4 == "DROUGHT" | ir_jd5 == "DROUGHT" | ir_jd6 == "DROUGHT" | dr_jd1 == "DROUGHT" | dr_jd2 == "DROUGHT" | dr_jd3 == "DROUGHT" | dr_jd4 == "DROUGHT"
+	gen GM_jd = 1 if ir_jd1 == "GALL MIDGE" | ir_jd2 == "GALL MIDGE" | ir_jd3 == "GALL MIDGE" | ir_jd4 == "GALL MIDGE" | ir_jd5 == "GALL MIDGE" | ir_jd6 == "GALL MIDGE" | dr_jd1 == "GALL MIDGE" | dr_jd2 == "GALL MIDGE" | dr_jd3 == "GALL MIDGE" | dr_jd4 == "GALL MIDGE"
+	gen GAS_jd = 1 if ir_jd1 == "GOLDEN APPLE SNAIL" | ir_jd2 == "GOLDEN APPLE SNAIL" | ir_jd3 == "GOLDEN APPLE SNAIL" | ir_jd4 == "GOLDEN APPLE SNAIL" | ir_jd5 == "GOLDEN APPLE SNAIL" | ir_jd6 == "GOLDEN APPLE SNAIL" | dr_jd1 == "GOLDEN APPLE SNAIL" | dr_jd2 == "GOLDEN APPLE SNAIL" | dr_jd3 == "GOLDEN APPLE SNAIL" | dr_jd4 == "GOLDEN APPLE SNAIL"
+	gen LF_jd = 1 if ir_jd1 == "LEAF FOLDER" | ir_jd2 == "LEAF FOLDER" | ir_jd3 == "LEAF FOLDER" | ir_jd4 == "LEAF FOLDER" | ir_jd5 == "LEAF FOLDER" | ir_jd6 == "LEAF FOLDER" | dr_jd1 == "LEAF FOLDER" | dr_jd2 == "LEAF FOLDER" | dr_jd3 == "LEAF FOLDER" | dr_jd4 == "LEAF FOLDER"
+	gen PH_jd = 1 if ir_jd1 == "PLANTHOPPER" | ir_jd2 == "PLANTHOPPER" | ir_jd3 == "PLANTHOPPER" | ir_jd4 == "PLANTHOPPER" | ir_jd5 == "PLANTHOPPER" | ir_jd6 == "PLANTHOPPER" | dr_jd1 == "PLANTHOPPER" | dr_jd2 == "PLANTHOPPER" | dr_jd3 == "PLANTHOPPER" | dr_jd4 == "PLANTHOPPER"
+	gen Rat_jd = 1 if ir_jd1 == "RAT" | ir_jd2 == "RAT" | ir_jd3 == "RAT" | ir_jd4 == "RAT" | ir_jd5 == "RAT" | ir_jd6 == "RAT" | dr_jd1 == "RAT" | dr_jd2 == "RAT" | dr_jd3 == "RAT" | dr_jd4 == "RAT"
+	gen RB_jd = 1 if ir_jd1 == "RICE BLAST" | ir_jd2 == "RICE BLAST" | ir_jd3 == "RICE BLAST" | ir_jd4 == "RICE BLAST" | ir_jd5 == "RICE BLAST" | ir_jd6 == "RICE BLAST" | dr_jd1 == "RICE BLAST" | dr_jd2 == "RICE BLAST" | dr_jd3 == "RICE BLAST" | dr_jd4 == "RICE BLAST"
+	gen RBug_jd = 1 if ir_jd1 == "RICE BUG" | ir_jd2 == "RICE BUG" | ir_jd3 == "RICE BUG" | ir_jd4 == "RICE BUG" | ir_jd5 == "RICE BUG" | ir_jd6 == "RICE BUG" | dr_jd1 == "RICE BUG" | dr_jd2 == "RICE BUG" | dr_jd3 == "RICE BUG" | dr_jd4 == "RICE BUG"
+	gen Rodent_jd = 1 if ir_jd1 == "RODENT" | ir_jd2 == "RODENT" | ir_jd3 == "RODENT" | ir_jd4 == "RODENT" | ir_jd5 == "RODENT" | ir_jd6 == "RODENT" | dr_jd1 == "RODENT" | dr_jd2 == "RODENT" | dr_jd3 == "RODENT" | dr_jd4 == "RODENT"
+	gen SR_jd = 1 if ir_jd1 == "SHEATH ROT" | ir_jd2 == "SHEATH ROT" | ir_jd3 == "SHEATH ROT" | ir_jd4 == "SHEATH ROT" | ir_jd5 == "SHEATH ROT" | ir_jd6 == "SHEATH ROT" | dr_jd1 == "SHEATH ROT" | dr_jd2 == "SHEATH ROT" | dr_jd3 == "SHEATH ROT" | dr_jd4 == "SHEATH ROT"
+	gen SHGH_jd = 1 if ir_jd1 == "SHORT-HORNED GRASSHOPPER" | ir_jd2 == "SHORT-HORNED GRASSHOPPER" | ir_jd3 == "SHORT-HORNED GRASSHOPPER" | ir_jd4 == "SHORT-HORNED GRASSHOPPER" | ir_jd5 == "SHORT-HORNED GRASSHOPPER" | ir_jd6 == "SHORT-HORNED GRASSHOPPER" | dr_jd1 == "SHORT-HORNED GRASSHOPPER" | dr_jd2 == "SHORT-HORNED GRASSHOPPER" | dr_jd3 == "SHORT-HORNED GRASSHOPPER" | dr_jd4 == "SHORT-HORNED GRASSHOPPER"
+	gen SB_jd = 1 if ir_jd1 == "STEM BORER" | ir_jd2 == "STEM BORER" | ir_jd3 == "STEM BORER" | ir_jd4 == "STEM BORER" | ir_jd5 == "STEM BORER" | ir_jd6 == "STEM BORER" | dr_jd1 == "STEM BORER" | dr_jd2 == "STEM BORER" | dr_jd3 == "STEM BORER" | dr_jd4 == "STEM BORER"
+	gen SM_jd = 1 if ir_jd1 == "SUBMERGENCE" | ir_jd2 == "SUBMERGENCE" | ir_jd3 == "SUBMERGENCE" | ir_jd4 == "SUBMERGENCE" | ir_jd5 == "SUBMERGENCE" | ir_jd6 == "SUBMERGENCE" | dr_jd1 == "SUBMERGENCE" | dr_jd2 == "SUBMERGENCE" | dr_jd3 == "SUBMERGENCE" | dr_jd4 == "SUBMERGENCE"
+	gen Thrips_jd = 1 if ir_jd1 == "THRIPS" | ir_jd2 == "THRIPS" | ir_jd3 == "THRIPS" | ir_jd4 == "THRIPS" | ir_jd5 == "THRIPS" | ir_jd6 == "THRIPS" | dr_jd1 == "THRIPS" | dr_jd2 == "THRIPS" | dr_jd3 == "THRIPS" | dr_jd4 == "THRIPS"
+	gen BLS_jd = 1 if ir_jd1 == "BACTERIAL LEAF STREAK" | ir_jd2 == "BACTERIAL LEAF STREAK" | ir_jd3 == "BACTERIAL LEAF STREAK" | ir_jd4 == "BACTERIAL LEAF STREAK" | ir_jd5 == "BACTERIAL LEAF STREAK" | ir_jd6 == "BACTERIAL LEAF STREAK" | dr_jd1 == "BACTERIAL LEAF STREAK" | dr_jd2 == "BACTERIAL LEAF STREAK" | dr_jd3 == "BACTERIAL LEAF STREAK" | dr_jd4 == "BACTERIAL LEAF STREAK"
+	gen BS_jd = 1 if ir_jd1 == "BROWN SPOT" | ir_jd2 == "BROWN SPOT" | ir_jd3 == "BROWN SPOT" | ir_jd4 == "BROWN SPOT" | ir_jd5 == "BROWN SPOT" | ir_jd6 == "BROWN SPOT" | dr_jd1 == "BROWN SPOT" | dr_jd2 == "BROWN SPOT" | dr_jd3 == "BROWN SPOT" | dr_jd4 == "BROWN SPOT"
+	gen GS_jd = 1 if ir_jd1 == "GRASSY STOUT" | ir_jd2 == "GRASSY STOUT" | ir_jd3 == "GRASSY STOUT" | ir_jd4 == "GRASSY STOUT" | ir_jd5 == "GRASSY STOUT" | ir_jd6 == "GRASSY STOUT" | dr_jd1 == "GRASSY STOUT" | dr_jd2 == "GRASSY STOUT" | dr_jd3 == "GRASSY STOUT" | dr_jd4 == "GRASSY STOUT"
+	gen NB_jd = 1 if ir_jd1 == "NECK BLAST" | ir_jd2 == "NECK BLAST" | ir_jd3 == "NECK BLAST" | ir_jd4 == "NECK BLAST" | ir_jd5 == "NECK BLAST" | ir_jd6 == "NECK BLAST" | dr_jd1 == "NECK BLAST" | dr_jd2 == "NECK BLAST" | dr_jd3 == "NECK BLAST" | dr_jd4 == "NECK BLAST"
+	gen RS_jd = 1 if ir_jd1 == "RAGGED STUNT" | ir_jd2 == "RAGGED STUNT" | ir_jd3 == "RAGGED STUNT" | ir_jd4 == "RAGGED STUNT" | ir_jd5 == "RAGGED STUNT" | ir_jd6 == "RAGGED STUNT" | dr_jd1 == "RAGGED STUNT" | dr_jd2 == "RAGGED STUNT" | dr_jd3 == "RAGGED STUNT" | dr_jd4 == "RAGGED STUNT"
+	gen SBLIGHT_jd = 1 if ir_jd1 == "SHEATH BLIGHT" | ir_jd2 == "SHEATH BLIGHT" | ir_jd3 == "SHEATH BLIGHT" | ir_jd4 == "SHEATH BLIGHT" | ir_jd5 == "SHEATH BLIGHT" | ir_jd6 == "SHEATH BLIGHT" | dr_jd1 == "SHEATH BLIGHT" | dr_jd2 == "SHEATH BLIGHT" | dr_jd3 == "SHEATH BLIGHT" | dr_jd4 == "SHEATH BLIGHT"
+	gen SP_jd = 1 if ir_jd1 == "SHEATH PANICLE" | ir_jd2 == "SHEATH PANICLE" | ir_jd3 == "SHEATH PANICLE" | ir_jd4 == "SHEATH PANICLE" | ir_jd5 == "SHEATH PANICLE" | ir_jd6 == "SHEATH PANICLE" | dr_jd1 == "SHEATH PANICLE" | dr_jd2 == "SHEATH PANICLE" | dr_jd3 == "SHEATH PANICLE" | dr_jd4 == "SHEATH PANICLE"
+	gen Tungro_jd = 1 if ir_jd1 == "TUNGRO" | ir_jd2 == "TUNGRO" | ir_jd3 == "TUNGRO" | ir_jd4 == "TUNGRO" | ir_jd5 == "TUNGRO" | ir_jd6 == "TUNGRO" | dr_jd1 == "TUNGRO" | dr_jd2 == "TUNGRO" | dr_jd3 == "TUNGRO" | dr_jd4 == "TUNGRO"
+
+	replace AW_jd = 0 if AW_jd == .
+	replace BBLIGHT_jd = 0 if BBLIGHT_jd == .
+	replace Blast_jd = 0 if Blast_jd == .
+	replace CW_jd = 0 if CW_jd == .
+	replace Check_jd = 0 if Check_jd == .
+	replace Drought_jd = 0 if Drought_jd == .
+	replace GM_jd = 0 if GM_jd == .
+	replace GAS_jd = 0 if GAS_jd == .
+	replace LF_jd = 0 if LF_jd == .
+	replace PH_jd = 0 if PH_jd == .
+	replace Rat_jd = 0 if Rat_jd == .
+	replace RB_jd = 0 if RB_jd == .
+	replace RBug_jd = 0 if RBug_jd == .
+	replace Rodent_jd = 0 if Rodent_jd == .
+	replace SR_jd = 0 if SR_jd == .
+	replace SHGH_jd = 0 if SHGH_jd == .
+	replace SB_jd = 0 if SB_jd == .
+	replace SM_jd = 0 if SM_jd == .
+	replace Thrips_jd = 0 if Thrips_jd == .
+	replace BLS_jd = 0 if BLS_jd == .
+	replace BS_jd = 0 if BS_jd == .
+	replace GS_jd = 0 if GS_jd == .
+	replace NB_jd = 0 if NB_jd == .
+	replace RS_jd = 0 if RS_jd == .
+	replace SBLIGHT_jd = 0 if SBLIGHT_jd == .
+	replace SP_jd = 0 if SP_jd == .
+	replace Tungro_jd = 0 if Tungro_jd == .
 	
 	
 * **********************************************************************
@@ -256,12 +260,29 @@
 	label variable market "Market Information" 
 	label variable climate "Climate Information" 
 	label variable repvar_jw "Replacement Variety (Wet)" 
-	label variable repvar_jd "Replacement Variety (Dry)" 
-	label variable number "Insect/Disease Number" 
-	label variable ir_jw "Insect (Wet)" 
-	label variable ir_jd "Insect (Dry)" 
-	label variable dr_jw "Disease (Wet)" 
-	label variable dr_jd "Disease (Dry)"
+	label variable repvar_jd "Replacement Variety (Dry)"
+	
+	label variable ir_jw1 "Insect (Wet Season - Response 1)" 
+	label variable ir_jw2 "Insect (Wet Season - Response 2)" 
+	label variable ir_jw3 "Insect (Wet Season - Response 3)" 
+	label variable ir_jw4 "Insect (Wet Season - Response 4)" 
+	label variable ir_jw5 "Insect (Wet Season - Response 5)" 
+	label variable ir_jw6 "Insect (Wet Season - Response 6)" 
+	label variable ir_jd1 "Insect (Dry Season - Response 1)" 
+	label variable ir_jd2 "Insect (Dry Season - Response 2)" 
+	label variable ir_jd3 "Insect (Dry Season - Response 3)" 
+	label variable ir_jd4 "Insect (Dry Season - Response 4)" 
+	label variable ir_jd5 "Insect (Dry Season - Response 5)" 
+	label variable ir_jd6 "Insect (Dry Season - Response 6)" 
+	label variable dr_jw1 "Disease (Wet Season - Response 1)" 
+	label variable dr_jw2 "Disease (Wet Season - Response 2)" 
+	label variable dr_jw3 "Disease (Wet Season - Response 3)" 
+	label variable dr_jw4 "Disease (Wet Season - Response 4)" 
+	label variable dr_jd1 "Disease (Dry Season - Response 1)" 
+	label variable dr_jd2 "Disease (Dry Season - Response 2)" 
+	label variable dr_jd3 "Disease (Dry Season - Response 3)" 
+	label variable dr_jd4 "Disease (Dry Season - Response 4)" 
+	
 	label variable AW_jw "Armyworm (Wet Season)" 
 	label variable BBLIGHT_jw "Bacterial Blight (Wet Season)" 
 	label variable Blast_jw "Blast (Wet Season)" 
@@ -290,7 +311,7 @@
 	label variable SP_jw "Sheath Panicle (Wet Season)" 
 	label variable Tungro_jw "Tungro (Wet Season)" 
 	label variable AW_jd "Armyworm (Dry Season)" 
-	label variable BB_jd "Bacterial Blight (Dry Season)" 
+	label variable BBLIGHT_jd "Bacterial Blight (Dry Season)" 
 	label variable Blast_jd "Blast (Dry Season)" 
 	label variable CW_jd "Caseworm (Dry Season)" 
 	label variable Check_jd "Check (Dry Season)" 
@@ -316,7 +337,7 @@
 	label variable SBLIGHT_jd "Sheath Blight (Dry Season)" 
 	label variable SP_jd "Sheath Panicle (Dry Season)" 
 	label variable Tungro_jd "Tungro (Dry Season)" 
-	
+
 	
 *Define and label values for variables
 	*preyveng
@@ -365,7 +386,7 @@
 		label values  SP_jw yesno
 		label values  Tungro_jw yesno
 		label values  AW_jd yesno
-		label values  BB_jd yesno
+		label values  BBLIGHT_jd yesno
 		label values  Blast_jd yesno
 		label values  CW_jd yesno
 		label values  Check_jd yesno
@@ -391,12 +412,11 @@
 		label values  SBLIGHT_jd yesno
 		label values  SP_jd yesno
 		label values  Tungro_jd yesno
-	
+		
 	
 * **********************************************************************
 * 5 -	EXPECTED OUTPUT
 * **********************************************************************
-
 
 	/*
 	Comment: 
@@ -405,26 +425,46 @@
 	*/
 
 *Frequency and Percentage Distribution of Insects and Diseases Found in Replacement Varieties during Wet Season
-	tab ir_jw repvar_jw if repvar_jw == "PHKA RUMDOUL" | repvar_jw == "IR504", col rowsort
-	tab dr_jw repvar_jw if repvar_jw == "PHKA RUMDOUL" | repvar_jw == "IR504", col rowsort
+	**************
+	*PHKA RUMDOUL*
+	**************
+	summarize AW_jw- Tungro_jw if repvar_jw == "PHKA RUMDOUL"
+	tab1 AW_jw- Tungro_jw if repvar_jw == "PHKA RUMDOUL"
+	**************
+	*   IR504    *
+	**************
+	summarize AW_jw- Tungro_jw if repvar_jw == "IR504"
+	tab1 AW_jw- Tungro_jw if repvar_jw == "IR504"
 	
 *Frequency and Percentage Distribution of Insects and Diseases Found in Replacement Varieties during Dry Season
-	tab ir_jd repvar_jd if repvar_jd == "IR504" | repvar_jd == "IR85", col rowsort
-	tab dr_jd repvar_jd if repvar_jd == "IR504" | repvar_jd == "IR85", col rowsort
-
+	**************
+	*   IR504    *
+	**************
+	summarize AW_jd- Tungro_jd if repvar_jd == "IR504"
+	tab1 AW_jd- Tungro_jd if repvar_jd == "IR504"
+	**************
+	*    IR85    *
+	**************
+	summarize AW_jd- Tungro_jd if repvar_jd == "IR85"
+	tab1 AW_jd- Tungro_jd if repvar_jd == "IR85"
+	
+*Statistics Verification
+	tab repvar_jw if repvar_jw == "PHKA RUMDOUL" | repvar_jw == "IR504"
+	tab repvar_jd if repvar_jd == "IR504" | repvar_jd == "IR85"
+		
 * **********************************************************************
 * 6 - OTHER MATTERS
 * **********************************************************************
 
 *Order variables in the dataset
-	order hhid session hh preyveng date morning market climate repvar_jw repvar_jd number
+	order hhid session hh preyveng date morning market climate repvar_jw repvar_jd ir_jw1 ir_jw2 ir_jw3 ir_jw4 ir_jw5 ir_jw6 ir_jd1 ir_jd2 ir_jd3 ir_jd4 ir_jd5 ir_jd6 dr_jw1 dr_jw2 dr_jw3 dr_jw4 dr_jd1 dr_jd2 dr_jd3 dr_jd4  
 
 * **********************************************************************
 * 7 - PREPARING FOR EXPORT
 * **********************************************************************
 
 *Describe dataset
-	compress
+	compress	
 	describe
 	summarize 
 	
