@@ -291,7 +291,6 @@
 	label variable LF_jw "Leaf Folder (Wet Season)" 
 	label variable PH_jw "Planthopper (Wet Season)" 
 	label variable Rat_jw "Rat (Wet Season)" 
-	label variable RB_jw "Rice Blast (Wet Season)" 
 	label variable RBug_jw "Rice Bug (Wet Season)" 
 	label variable Rodent_jw "Rodent (Wet Season)" 
 	label variable SR_jw "Sheath Rot (Wet Season)" 
@@ -318,7 +317,6 @@
 	label variable LF_jd "Leaf Folder (Dry Season)" 
 	label variable PH_jd "Planthopper (Dry Season)" 
 	label variable Rat_jd "Rat (Dry Season)" 
-	label variable RB_jd "Rice Blast (Dry Season)" 
 	label variable RBug_jd "Rice Bug (Dry Season)" 
 	label variable Rodent_jd "Rodent (Dry Season)" 
 	label variable SR_jd "Sheath Rot (Dry Season)" 
@@ -366,7 +364,6 @@
 		label values  LF_jw yesno
 		label values  PH_jw yesno
 		label values  Rat_jw yesno
-		label values  RB_jw yesno
 		label values  RBug_jw yesno
 		label values  Rodent_jw yesno
 		label values  SR_jw yesno
@@ -393,7 +390,6 @@
 		label values  LF_jd yesno
 		label values  PH_jd yesno
 		label values  Rat_jd yesno
-		label values  RB_jd yesno
 		label values  RBug_jd yesno
 		label values  Rodent_jd yesno
 		label values  SR_jd yesno
@@ -448,6 +444,7 @@
 *Statistics Verification
 	tab repvar_jw if repvar_jw == "PHKA RUMDOUL" | repvar_jw == "IR504"
 	tab repvar_jd if repvar_jd == "IR504" | repvar_jd == "IR85"
+
 		
 * **********************************************************************
 * 6 - OTHER MATTERS
