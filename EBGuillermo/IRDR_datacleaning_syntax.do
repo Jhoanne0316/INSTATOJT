@@ -22,6 +22,7 @@
 	global root = "C:\Users\Bianca Guillermo\git\04_syntax\EBGuillermo\raw"
 	global output = "C:\Users\Bianca Guillermo\git\04_syntax\EBGuillermo\refined"
 	
+	
 * ***********************************************************************
 * 1 - PREPARING DATA
 * ***********************************************************************
@@ -31,6 +32,7 @@
 
 *Create draft version of data
 	save "$output\0_IRDR_draft", replace
+	
 	
 * ***********************************************************************
 * 2 - DATA CLEANING
@@ -121,7 +123,6 @@
 	replace dr_jd= "TUNGRO" if dr_jd== "TUNGOR"
 	replace dr_jd= "PLANTHOPPER" if dr_jd== "BROWN PLANTHOPPER"
 	replace dr_jd= "THRIPS" if dr_jd== "THIRP"
-	
 	
 *Reshape back to wide
 	reshape wide
@@ -564,9 +565,27 @@
 						GAS_jd LF_jd PH_jd Rat_jd RBug_jd Rodent_jd SR_jd SHGH_jd SB_jd SM_jd Thrips_jd BLS_jd BS_jd GS_jd NB_jd RS_jd SBLIGHT_jd SP_jd ///
 						Tungro_jd yesno
 		
-	
+
 * **********************************************************************
-* 5 -	EXPECTED OUTPUT
+* 5 - OTHER MATTERS
+* **********************************************************************
+
+*Order variables in the dataset (Demographics, Repvar, Insects, Diseases, Others)
+	order 	hhid session hh preyveng date morning market climate repvar_jw repvar_jd ///
+			ir_jw1 ir_jw2 ir_jw3 ir_jw4 ir_jw5 ir_jw6 ///
+			ir_jd1 ir_jd2 ir_jd3 ir_jd4 ir_jd5 ir_jd6 ///
+			dr_jw1 dr_jw2 dr_jw3 dr_jw4 ///
+			dr_jd1 dr_jd2 dr_jd3 dr_jd4 ///
+			AW_jw CW_jw GM_jw GAS_jw LF_jw PH_jw RBug_jw SHGH_jw SB_jw Thrips_jw ///
+			BBLIGHT_jw BLS_jw Blast_jw BS_jw GS_jw NB_jw RS_jw SBLIGHT_jw SP_jw SR_jw Tungro_jw ///
+			Check_jw Drought_jw Rat_jw Rodent_jw SM_jw ///
+			AW_jd CW_jd GM_jd GAS_jd LF_jd PH_jd RBug_jd SHGH_jd SB_jd Thrips_jd ///
+			BBLIGHT_jd BLS_jd Blast_jd BS_jd GS_jd NB_jd RS_jd SBLIGHT_jd SP_jd SR_jd Tungro_jd ///
+			Check_jd Drought_jd Rat_jd Rodent_jd SM_jd
+			
+			
+* **********************************************************************
+* 6 -	EXPECTED OUTPUT
 * **********************************************************************
 
 	/*
@@ -602,25 +621,8 @@
 *Statistics Verification
 	tab repvar_jw if repvar_jw == "PHKA RUMDOUL" | repvar_jw == "IR504"
 	tab repvar_jd if repvar_jd == "IR504" | repvar_jd == "IR85"
-
 		
-* **********************************************************************
-* 6 - OTHER MATTERS
-* **********************************************************************
-
-*Order variables in the dataset (Demographics, Repvar, Insects, Diseases, Others)
-	order 	hhid session hh preyveng date morning market climate repvar_jw repvar_jd ///
-			ir_jw1 ir_jw2 ir_jw3 ir_jw4 ir_jw5 ir_jw6 ///
-			ir_jd1 ir_jd2 ir_jd3 ir_jd4 ir_jd5 ir_jd6 ///
-			dr_jw1 dr_jw2 dr_jw3 dr_jw4 ///
-			dr_jd1 dr_jd2 dr_jd3 dr_jd4 ///
-			AW_jw CW_jw GM_jw GAS_jw LF_jw PH_jw RBug_jw SHGH_jw SB_jw Thrips_jw ///
-			BBLIGHT_jw BLS_jw Blast_jw BS_jw GS_jw NB_jw RS_jw SBLIGHT_jw SP_jw SR_jw Tungro_jw ///
-			Check_jw Drought_jw Rat_jw Rodent_jw SM_jw ///
-			AW_jd CW_jd GM_jd GAS_jd LF_jd PH_jd RBug_jd SHGH_jd SB_jd Thrips_jd ///
-			BBLIGHT_jd BLS_jd Blast_jd BS_jd GS_jd NB_jd RS_jd SBLIGHT_jd SP_jd SR_jd Tungro_jd ///
-			Check_jd Drought_jd Rat_jd Rodent_jd SM_jd
-
+		
 * **********************************************************************
 * 7 - PREPARING FOR EXPORT
 * **********************************************************************
