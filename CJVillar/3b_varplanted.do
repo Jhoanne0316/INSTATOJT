@@ -444,10 +444,14 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 		tab amt_seed variety if tagvar ==1 
 		
 	*tag varieties per season to avoid double counting of varieties per household
-	note: taghh: The goal is to count the farmers who planted the specific variety per season, regardless of year. For example, one farmer planted I504 during dry season for 2017 and 2018. We only count it as one since we are not interested in year. 
+	note: taghh: The goal is to count the farmers who planted the specific variety ///
+	      per season, regardless of year. For example, one farmer planted I504 ///
+		  during dry season for 2017 and 2018. We only count it as one since we are ///
+		  not interested in year. 
 	
 	egen taghh= tag(hhid season2 variety) 
-	/*This function tags just one observation in each group of identical values with value 1 and any other observations in the same group with value 0*/
+	/*This function tags just one observation in each group of identical values 
+	  with value 1 and any other observations in the same group with value 0*/
 	
 	
 		*Number of Unique variety planted per season and household 
@@ -554,10 +558,13 @@ edit session hh hhid variety areaplanted areaunit conv_area if areaplanted>10
 	
 * keep what we want, get rid of what we don't
 	drop weightunit u checker prod sold_kg season areaplanted taghh tagvar 
-	note: prod, Sold_kg, areaplanted  is the same with Conv_prod, Conv_sold and Conv_area respectively
+	note: prod, Sold_kg, areaplanted  is the same with Conv_prod, Conv_sold and ///
+	      Conv_area respectively
 	 
 *Arrange all the variables in the data with specific order" 
-	order resid session hh hhid classif variety season2 year method source_seed seedtype buyers reasons price amt_seed per_sold distance_km areaunit conv_area conv_prod conv_sold yield
+	order resid session hh hhid classif variety season2 year method source_seed ///
+	seedtype buyers reasons price amt_seed per_sold distance_km areaunit conv_area ///
+	conv_prod conv_sold yield
 	
 *labelling variables
 
