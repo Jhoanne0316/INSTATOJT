@@ -19,8 +19,8 @@
 	clear all
 
 *Define directory
-	global root = "C:\Users\Bianca Guillermo\git\04_syntax\EBGuillermo\raw"
-	global output = "C:\Users\Bianca Guillermo\git\04_syntax\EBGuillermo\refined"
+	global root = "C:\Users\Bianca Guillermo\git\INSTATOJT\EBGuillermo\raw"
+	global output = "C:\Users\Bianca Guillermo\git\INSTATOJT\EBGuillermo\refined"
 	
 	
 * ***********************************************************************
