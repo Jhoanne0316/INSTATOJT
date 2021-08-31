@@ -19,9 +19,11 @@
 	clear all
 
 *Define directory
-	global root = "C:\Users\Bianca Guillermo\git\INSTATOJT\EBGuillermo\raw"
-	global output = "C:\Users\Bianca Guillermo\git\INSTATOJT\EBGuillermo\refined"
+*	global root = "C:\Users\Bianca Guillermo\git\04_syntax\EBGuillermo\raw"
+*	global output = "C:\Users\Bianca Guillermo\git\04_syntax\EBGuillermo\refined"
 	
+	global root = "E:\Google Drive\INSTATOJT\EBGuillermo\raw"
+	global output = "E:\Google Drive\jy_mrt_files\MRT - VERDE (2018)"
 	
 * ***********************************************************************
 * 1 - PREPARING DATA
@@ -31,9 +33,8 @@
 	import excel "$root\IRDR.xlsx", sheet("Sheet1") firstrow
 
 *Create draft version of data
-	save "$output\0_IRDR_draft", replace
-	
-	
+*	save "$output\0_IRDR_draft", replace
+	save "$output\0_IRDR_verde", replace
 * ***********************************************************************
 * 2 - DATA CLEANING
 * ***********************************************************************
@@ -123,6 +124,7 @@
 	replace dr_jd= "TUNGRO" if dr_jd== "TUNGOR"
 	replace dr_jd= "PLANTHOPPER" if dr_jd== "BROWN PLANTHOPPER"
 	replace dr_jd= "THRIPS" if dr_jd== "THIRP"
+	
 	
 *Reshape back to wide
 	reshape wide
@@ -232,11 +234,11 @@
 							ir_jw5 == "BROWN SPOT" | ir_jw6 == "BROWN SPOT" |  ///
 							dr_jw1 == "BROWN SPOT" | dr_jw2 == "BROWN SPOT" |  ///
 							dr_jw3 == "BROWN SPOT" | dr_jw4 == "BROWN SPOT"
-	gen GS_jw = 1 if 		ir_jw1 == "GRASSY STOUT" | ir_jw2 == "GRASSY STOUT" |  ///
-							ir_jw3 == "GRASSY STOUT" | ir_jw4 == "GRASSY STOUT" |  ///
-							ir_jw5 == "GRASSY STOUT" | ir_jw6 == "GRASSY STOUT" |  ///
-							dr_jw1 == "GRASSY STOUT" | dr_jw2 == "GRASSY STOUT" |  ///
-							dr_jw3 == "GRASSY STOUT" | dr_jw4 == "GRASSY STOUT"
+	gen GS_jw = 1 if 		ir_jw1 == "GRASSY STUNT" | ir_jw2 == "GRASSY STUNT" |  ///
+							ir_jw3 == "GRASSY STUNT" | ir_jw4 == "GRASSY STUNT" |  ///
+							ir_jw5 == "GRASSY STUNT" | ir_jw6 == "GRASSY STUNT" |  ///
+							dr_jw1 == "GRASSY STUNT" | dr_jw2 == "GRASSY STUNT" |  ///
+							dr_jw3 == "GRASSY STUNT" | dr_jw4 == "GRASSY STUNT"
 	gen NB_jw = 1 if 		ir_jw1 == "NECK BLAST" | ir_jw2 == "NECK BLAST" |  ///
 							ir_jw3 == "NECK BLAST" | ir_jw4 == "NECK BLAST" |  ///
 							ir_jw5 == "NECK BLAST" | ir_jw6 == "NECK BLAST" |  ///
@@ -252,17 +254,16 @@
 							ir_jw5 == "SHEATH BLIGHT" | ir_jw6 == "SHEATH BLIGHT" |  ///
 							dr_jw1 == "SHEATH BLIGHT" | dr_jw2 == "SHEATH BLIGHT" |  ///
 							dr_jw3 == "SHEATH BLIGHT" | dr_jw4 == "SHEATH BLIGHT"
-	gen SP_jw = 1 if 		ir_jw1 == "SHEATH PANICLE" | ir_jw2 == "SHEATH PANICLE" |  ///
-							ir_jw3 == "SHEATH PANICLE" | ir_jw4 == "SHEATH PANICLE" |  ///
-							ir_jw5 == "SHEATH PANICLE" | ir_jw6 == "SHEATH PANICLE" |  ///
-							dr_jw1 == "SHEATH PANICLE" | dr_jw2 == "SHEATH PANICLE" |  ///
-							dr_jw3 == "SHEATH PANICLE" | dr_jw4 == "SHEATH PANICLE"
+
 	gen Tungro_jw = 1 if 	ir_jw1 == "TUNGRO" | ir_jw2 == "TUNGRO" |  ///
 							ir_jw3 == "TUNGRO" | ir_jw4 == "TUNGRO" |  ///
 							ir_jw5 == "TUNGRO" | ir_jw6 == "TUNGRO" |  ///
 							dr_jw1 == "TUNGRO" | dr_jw2 == "TUNGRO" |  ///
 							dr_jw3 == "TUNGRO" | dr_jw4 == "TUNGRO"
 
+/*	
+	Note: no need to replace 0 when there is no response to indicate that the farmer did not encounter the insect of disease
+	
 	replace AW_jw = 0 if AW_jw == .
 	replace BBLIGHT_jw = 0 if BBLIGHT_jw == .
 	replace Blast_jw = 0 if Blast_jw == .
@@ -289,7 +290,8 @@
 	replace SBLIGHT_jw = 0 if SBLIGHT_jw == .
 	replace SP_jw = 0 if SP_jw == .
 	replace Tungro_jw = 0 if Tungro_jw == .
-	
+*/
+
 *Dry Season
 	gen AW_jd = 1 if 		ir_jd1 == "ARMYWORM" | ir_jd2 == "ARMYWORM" |  ///
 							ir_jd3 == "ARMYWORM" | ir_jd4 == "ARMYWORM" |  ///
@@ -361,6 +363,15 @@
 							ir_jd5 == "SHEATH ROT" | ir_jd6 == "SHEATH ROT" |  ///
 							dr_jd1 == "SHEATH ROT" | dr_jd2 == "SHEATH ROT" |  ///
 							dr_jd3 == "SHEATH ROT" | dr_jd4 == "SHEATH ROT"
+							
+	replace SR_jd = 1 if 	ir_jw1 == "SHEATH PANICLE" | ir_jw2 == "SHEATH PANICLE" |  ///
+							ir_jw3 == "SHEATH PANICLE" | ir_jw4 == "SHEATH PANICLE" |  ///
+							ir_jw5 == "SHEATH PANICLE" | ir_jw6 == "SHEATH PANICLE" |  ///
+							dr_jw1 == "SHEATH PANICLE" | dr_jw2 == "SHEATH PANICLE" |  ///
+							dr_jw3 == "SHEATH PANICLE" | dr_jw4 == "SHEATH PANICLE"
+							
+	note SR_jd: There is no Sheath panicle but sheath rot is found in panicle, implying that sheath panicle is the same as sheath rot
+							
 	gen SHGH_jd = 1 if 		ir_jd1 == "SHORT-HORNED GRASSHOPPER" | ir_jd2 == "SHORT-HORNED GRASSHOPPER" |  ///
 							ir_jd3 == "SHORT-HORNED GRASSHOPPER" | ir_jd4 == "SHORT-HORNED GRASSHOPPER" |  ///
 							ir_jd5 == "SHORT-HORNED GRASSHOPPER" | ir_jd6 == "SHORT-HORNED GRASSHOPPER" |  ///
@@ -391,11 +402,11 @@
 							ir_jd5 == "BROWN SPOT" | ir_jd6 == "BROWN SPOT" |  ///
 							dr_jd1 == "BROWN SPOT" | dr_jd2 == "BROWN SPOT" |  ///
 							dr_jd3 == "BROWN SPOT" | dr_jd4 == "BROWN SPOT"
-	gen GS_jd = 1 if 		ir_jd1 == "GRASSY STOUT" | ir_jd2 == "GRASSY STOUT" |  ///
-							ir_jd3 == "GRASSY STOUT" | ir_jd4 == "GRASSY STOUT" |  ///
-							ir_jd5 == "GRASSY STOUT" | ir_jd6 == "GRASSY STOUT" |  ///
-							dr_jd1 == "GRASSY STOUT" | dr_jd2 == "GRASSY STOUT" |  ///
-							dr_jd3 == "GRASSY STOUT" | dr_jd4 == "GRASSY STOUT"
+	gen GS_jd = 1 if 		ir_jd1 == "GRASSY STUNT" | ir_jd2 == "GRASSY STUNT" |  ///
+							ir_jd3 == "GRASSY STUNT" | ir_jd4 == "GRASSY STUNT" |  ///
+							ir_jd5 == "GRASSY STUNT" | ir_jd6 == "GRASSY STUNT" |  ///
+							dr_jd1 == "GRASSY STUNT" | dr_jd2 == "GRASSY STUNT" |  ///
+							dr_jd3 == "GRASSY STUNT" | dr_jd4 == "GRASSY STUNT"
 	gen NB_jd = 1 if 		ir_jd1 == "NECK BLAST" | ir_jd2 == "NECK BLAST" |  ///
 							ir_jd3 == "NECK BLAST" | ir_jd4 == "NECK BLAST" |  ///
 							ir_jd5 == "NECK BLAST" | ir_jd6 == "NECK BLAST" |  ///
@@ -411,17 +422,16 @@
 							ir_jd5 == "SHEATH BLIGHT" | ir_jd6 == "SHEATH BLIGHT" |  ///
 							dr_jd1 == "SHEATH BLIGHT" | dr_jd2 == "SHEATH BLIGHT" |  ///
 							dr_jd3 == "SHEATH BLIGHT" | dr_jd4 == "SHEATH BLIGHT"
-	gen SP_jd = 1 if 		ir_jd1 == "SHEATH PANICLE" | ir_jd2 == "SHEATH PANICLE" |  ///
-							ir_jd3 == "SHEATH PANICLE" | ir_jd4 == "SHEATH PANICLE" |  ///
-							ir_jd5 == "SHEATH PANICLE" | ir_jd6 == "SHEATH PANICLE" |  ///
-							dr_jd1 == "SHEATH PANICLE" | dr_jd2 == "SHEATH PANICLE" |  ///
-							dr_jd3 == "SHEATH PANICLE" | dr_jd4 == "SHEATH PANICLE"
+
 	gen Tungro_jd = 1 if 	ir_jd1 == "TUNGRO" | ir_jd2 == "TUNGRO" |  ///
 							ir_jd3 == "TUNGRO" | ir_jd4 == "TUNGRO" |  ///
 							ir_jd5 == "TUNGRO" | ir_jd6 == "TUNGRO" |  ///
 							dr_jd1 == "TUNGRO" | dr_jd2 == "TUNGRO" |  ///
 							dr_jd3 == "TUNGRO" | dr_jd4 == "TUNGRO"
 
+/*	
+	Note: no need to replace 0 when there is no response to indicate that the farmer did not encounter the insect of disease
+	
 	replace AW_jd = 0 if AW_jd == .
 	replace BBLIGHT_jd = 0 if BBLIGHT_jd == .
 	replace Blast_jd = 0 if Blast_jd == .
@@ -449,7 +459,8 @@
 	replace SP_jd = 0 if SP_jd == .
 	replace Tungro_jd = 0 if Tungro_jd == .
 	
-	
+*/	
+
 * **********************************************************************
 * 4 -	VARIABLE LABEL, LABEL DEFINITIONS, AND LABEL VALUES
 * **********************************************************************
@@ -487,58 +498,58 @@
 	label variable dr_jd3 "Disease (Dry Season - Response 3)" 
 	label variable dr_jd4 "Disease (Dry Season - Response 4)" 
 	
-	label variable AW_jw "Armyworm (Wet Season)" 
-	label variable BBLIGHT_jw "Bacterial Blight (Wet Season)" 
-	label variable Blast_jw "Blast (Wet Season)" 
-	label variable CW_jw "Caseworm (Wet Season)" 
-	label variable Check_jw "Check (Wet Season)" 
-	label variable Drought_jw "Drought (Wet Season)" 
-	label variable GM_jw "Gall Midge (Wet Season)" 
-	label variable GAS_jw "Golden Apple Snail (Wet Season)" 
-	label variable LF_jw "Leaf Folder (Wet Season)" 
-	label variable PH_jw "Planthopper (Wet Season)" 
-	label variable Rat_jw "Rat (Wet Season)" 
-	label variable RBug_jw "Rice Bug (Wet Season)" 
-	label variable Rodent_jw "Rodent (Wet Season)" 
-	label variable SR_jw "Sheath Rot (Wet Season)" 
-	label variable SHGH_jw "Short-Horned Grasshopper (Wet Season)" 
-	label variable SB_jw "Stem Borer (Wet Season)" 
-	label variable SM_jw "Submergence (Wet Season)" 
-	label variable Thrips_jw "Thrips (Wet Season)" 
-	label variable BLS_jw "Bacterial Leaf Streak (Wet Season)" 
-	label variable BS_jw "Brown Spot (Wet Season)" 
-	label variable GS_jw "Grassy Stout (Wet Season)" 
-	label variable NB_jw "Neck Blast (Wet Season)" 
-	label variable RS_jw "Ragged Stunt (Wet Season)" 
-	label variable SBLIGHT_jw "Sheath Blight (Wet Season)" 
-	label variable SP_jw "Sheath Panicle (Wet Season)" 
-	label variable Tungro_jw "Tungro (Wet Season)" 
-	label variable AW_jd "Armyworm (Dry Season)" 
-	label variable BBLIGHT_jd "Bacterial Blight (Dry Season)" 
-	label variable Blast_jd "Blast (Dry Season)" 
-	label variable CW_jd "Caseworm (Dry Season)" 
-	label variable Check_jd "Check (Dry Season)" 
-	label variable Drought_jd "Drought (Dry Season)" 
-	label variable GM_jd "Gall Midge (Dry Season)" 
-	label variable GAS_jd "Golden Apple Snail (Dry Season)" 
-	label variable LF_jd "Leaf Folder (Dry Season)" 
-	label variable PH_jd "Planthopper (Dry Season)" 
-	label variable Rat_jd "Rat (Dry Season)" 
-	label variable RBug_jd "Rice Bug (Dry Season)" 
-	label variable Rodent_jd "Rodent (Dry Season)" 
-	label variable SR_jd "Sheath Rot (Dry Season)" 
-	label variable SHGH_jd "Short-Horned Grasshopper (Dry Season)" 
-	label variable SB_jd "Stem Borer (Dry Season)" 
-	label variable SM_jd "Submergence (Dry Season)" 
-	label variable Thrips_jd "Thrips (Dry Season)" 
-	label variable BLS_jd "Bacterial Leaf Streak (Dry Season)" 
-	label variable BS_jd "Brown Spot (Dry Season)" 
-	label variable GS_jd "Grassy Stout (Dry Season)" 
-	label variable NB_jd "Neck Blast (Dry Season)" 
-	label variable RS_jd "Ragged Stunt (Dry Season)" 
-	label variable SBLIGHT_jd "Sheath Blight (Dry Season)" 
-	label variable SP_jd "Sheath Panicle (Dry Season)" 
-	label variable Tungro_jd "Tungro (Dry Season)" 
+	label variable AW_jw "Armyworm  (WS)-insect"
+	label variable BBLIGHT_jw "Bacterial Blight  (WS)-disease"
+	label variable Blast_jw "Blast  (WS)-disease"
+	label variable CW_jw "Caseworm  (WS)-insect"
+	label variable Check_jw "Check  (WS)-"
+	label variable Drought_jw "Drought  (WS)-"
+	label variable GM_jw "Gall Midge  (WS)-insect"
+	label variable GAS_jw "Golden Apple Snail  (WS)-insect"
+	label variable LF_jw "Leaf Folder  (WS)-insect"
+	label variable PH_jw "Planthopper  (WS)-insect"
+	label variable Rat_jw "Rat  (WS)-insect"
+	label variable RBug_jw "Rice Bug  (WS)-insect"
+	label variable Rodent_jw "Rodent  (WS)-insect"
+	label variable SR_jw "Sheath Rot  (WS)-disease"
+	label variable SHGH_jw "Short-Horned Grasshopper  (WS)-insect"
+	label variable SB_jw "Stem Borer  (WS)-insect"
+	label variable SM_jw "Submergence  (WS)-"
+	label variable Thrips_jw "Thrips  (WS)-insect"
+	label variable BLS_jw "Bacterial Leaf Streak  (WS)-disease"
+	label variable BS_jw "Brown Spot  (WS)-disease"
+	label variable GS_jw "Grassy Stout  (WS)-disease"
+	label variable NB_jw "Neck Blast  (WS)-disease"
+	label variable RS_jw "Ragged Stunt  (WS)-disease"
+	label variable SBLIGHT_jw "Sheath Blight  (WS)-disease"
+	label variable Tungro_jw "Tungro  (WS)-disease"
+
+	label variable AW_jd "Armyworm  (DS)-insect"
+	label variable BBLIGHT_jd "Bacterial Blight  (DS)-disease"
+	label variable Blast_jd "Blast  (DS)-disease"
+	label variable CW_jd "Caseworm  (DS)-insect"
+	label variable Check_jd "Check  (DS)-"
+	label variable Drought_jd "Drought  (DS)-"
+	label variable GM_jd "Gall Midge  (DS)-insect"
+	label variable GAS_jd "Golden Apple Snail  (DS)-insect"
+	label variable LF_jd "Leaf Folder  (DS)-insect"
+	label variable PH_jd "Planthopper  (DS)-insect"
+	label variable Rat_jd "Rat  (DS)-insect"
+	label variable RBug_jd "Rice Bug  (DS)-insect"
+	label variable Rodent_jd "Rodent  (DS)-insect"
+	label variable SR_jd "Sheath Rot  (DS)-disease"
+	label variable SHGH_jd "Short-Horned Grasshopper  (DS)-insect"
+	label variable SB_jd "Stem Borer  (DS)-insect"
+	label variable SM_jd "Submergence  (DS)-"
+	label variable Thrips_jd "Thrips  (DS)-insect"
+	label variable BLS_jd "Bacterial Leaf Streak  (DS)-disease"
+	label variable BS_jd "Brown Spot  (DS)-disease"
+	label variable GS_jd "Grassy Stout  (DS)-disease"
+	label variable NB_jd "Neck Blast  (DS)-disease"
+	label variable RS_jd "Ragged Stunt  (DS)-disease"
+	label variable SBLIGHT_jd "Sheath Blight  (DS)-disease"
+	label variable Tungro_jd "Tungro  (DS)-disease"
+
 
 	
 *Define and label values for variables
@@ -561,31 +572,13 @@
 	*insects and diseases dummy variables
 		label define yesno 1 "Yes" 0 "No"
 		label values 	AW_jw BBLIGHT_jw Blast_jw CW_jw Check_jw Drought_jw GM_jw GAS_jw LF_jw PH_jw Rat_jw RBug_jw Rodent_jw SR_jw SHGH_jw SB_jw SM_jw ///
-						Thrips_jw BLS_jw BS_jw GS_jw NB_jw RS_jw SBLIGHT_jw SP_jw Tungro_jw AW_jd BBLIGHT_jd Blast_jd CW_jd Check_jd Drought_jd GM_jd ///
-						GAS_jd LF_jd PH_jd Rat_jd RBug_jd Rodent_jd SR_jd SHGH_jd SB_jd SM_jd Thrips_jd BLS_jd BS_jd GS_jd NB_jd RS_jd SBLIGHT_jd SP_jd ///
+						Thrips_jw BLS_jw BS_jw GS_jw NB_jw RS_jw SBLIGHT_jw Tungro_jw AW_jd BBLIGHT_jd Blast_jd CW_jd Check_jd Drought_jd GM_jd ///
+						GAS_jd LF_jd PH_jd Rat_jd RBug_jd Rodent_jd SR_jd SHGH_jd SB_jd SM_jd Thrips_jd BLS_jd BS_jd GS_jd NB_jd RS_jd SBLIGHT_jd ///
 						Tungro_jd yesno
 		
-
+	
 * **********************************************************************
-* 5 - OTHER MATTERS
-* **********************************************************************
-
-*Order variables in the dataset (Demographics, Repvar, Insects, Diseases, Others)
-	order 	hhid session hh preyveng date morning market climate repvar_jw repvar_jd ///
-			ir_jw1 ir_jw2 ir_jw3 ir_jw4 ir_jw5 ir_jw6 ///
-			ir_jd1 ir_jd2 ir_jd3 ir_jd4 ir_jd5 ir_jd6 ///
-			dr_jw1 dr_jw2 dr_jw3 dr_jw4 ///
-			dr_jd1 dr_jd2 dr_jd3 dr_jd4 ///
-			AW_jw CW_jw GM_jw GAS_jw LF_jw PH_jw RBug_jw SHGH_jw SB_jw Thrips_jw ///
-			BBLIGHT_jw BLS_jw Blast_jw BS_jw GS_jw NB_jw RS_jw SBLIGHT_jw SP_jw SR_jw Tungro_jw ///
-			Check_jw Drought_jw Rat_jw Rodent_jw SM_jw ///
-			AW_jd CW_jd GM_jd GAS_jd LF_jd PH_jd RBug_jd SHGH_jd SB_jd Thrips_jd ///
-			BBLIGHT_jd BLS_jd Blast_jd BS_jd GS_jd NB_jd RS_jd SBLIGHT_jd SP_jd SR_jd Tungro_jd ///
-			Check_jd Drought_jd Rat_jd Rodent_jd SM_jd
-			
-			
-* **********************************************************************
-* 6 -	EXPECTED OUTPUT
+* 5 -	EXPECTED OUTPUT
 * **********************************************************************
 
 	/*
@@ -621,8 +614,31 @@
 *Statistics Verification
 	tab repvar_jw if repvar_jw == "PHKA RUMDOUL" | repvar_jw == "IR504"
 	tab repvar_jd if repvar_jd == "IR504" | repvar_jd == "IR85"
+
 		
+*count the no. of farmers who encountered insects and/or diseases
+tab dr_jw1
+tab ir_jw1
+tab dr_jd1
+tab ir_jd1
 		
+* **********************************************************************
+* 6 - OTHER MATTERS
+* **********************************************************************
+
+*Order variables in the dataset (Demographics, Repvar, Insects, Diseases, Others)
+	order 	hhid session hh preyveng date morning market climate repvar_jw repvar_jd ///
+			ir_jw1 ir_jw2 ir_jw3 ir_jw4 ir_jw5 ir_jw6 ///
+			ir_jd1 ir_jd2 ir_jd3 ir_jd4 ir_jd5 ir_jd6 ///
+			dr_jw1 dr_jw2 dr_jw3 dr_jw4 ///
+			dr_jd1 dr_jd2 dr_jd3 dr_jd4 ///
+			BBLIGHT_jw Blast_jw SR_jw BLS_jw BS_jw GS_jw NB_jw RS_jw SBLIGHT_jw Tungro_jw ///
+			AW_jw CW_jw GM_jw GAS_jw LF_jw PH_jw Rat_jw RBug_jw Rodent_jw SHGH_jw SB_jw Thrips_jw ///
+			Check_jw Drought_jw SM_jw ///
+			BBLIGHT_jd Blast_jd SR_jd BLS_jd BS_jd GS_jd NB_jd RS_jd SBLIGHT_jd Tungro_jd ///
+			AW_jd CW_jd GM_jd GAS_jd LF_jd PH_jd Rat_jd RBug_jd Rodent_jd SHGH_jd SB_jd Thrips_jd ///
+			Check_jd Drought_jd SM_jd
+
 * **********************************************************************
 * 7 - PREPARING FOR EXPORT
 * **********************************************************************
@@ -633,7 +649,7 @@
 	summarize 
 	
 *Save the dataset
-	save "$output\0_IRDR_draft", replace
+	save "$output\0_IRDR_verde", replace
 	
 * **********************************************************************
 * END OF CODE
